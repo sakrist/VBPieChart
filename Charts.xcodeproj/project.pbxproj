@@ -22,6 +22,10 @@
 		D2C0FB8C18B01CBA00C51D08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6B18B01CBA00C51D08 /* UIKit.framework */; };
 		D2C0FB9418B01CBA00C51D08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D2C0FB9218B01CBA00C51D08 /* InfoPlist.strings */; };
 		D2C0FB9618B01CBA00C51D08 /* ChartsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FB9518B01CBA00C51D08 /* ChartsTests.m */; };
+		D2C0FBA318B01DC000C51D08 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FBA218B01DC000C51D08 /* QuartzCore.framework */; };
+		D2C0FBAD18B022DA00C51D08 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FBAC18B022DA00C51D08 /* UIColor+HexColor.m */; };
+		D2C0FBB018B02C0900C51D08 /* VBPiePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */; };
+		D2C0FBB318B02C2400C51D08 /* VBPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FBB218B02C2400C51D08 /* VBPieChart.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,13 @@
 		D2C0FB9118B01CBA00C51D08 /* ChartsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChartsTests-Info.plist"; sourceTree = "<group>"; };
 		D2C0FB9318B01CBA00C51D08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D2C0FB9518B01CBA00C51D08 /* ChartsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChartsTests.m; sourceTree = "<group>"; };
+		D2C0FBA218B01DC000C51D08 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D2C0FBAB18B022DA00C51D08 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+HexColor.h"; path = "Classes/UIColor+HexColor.h"; sourceTree = "<group>"; };
+		D2C0FBAC18B022DA00C51D08 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HexColor.m"; path = "Classes/UIColor+HexColor.m"; sourceTree = "<group>"; };
+		D2C0FBAE18B02C0900C51D08 /* VBPiePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VBPiePiece.h; path = Classes/VBPiePiece.h; sourceTree = "<group>"; };
+		D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VBPiePiece.m; path = Classes/VBPiePiece.m; sourceTree = "<group>"; };
+		D2C0FBB118B02C2400C51D08 /* VBPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VBPieChart.h; path = Classes/VBPieChart.h; sourceTree = "<group>"; };
+		D2C0FBB218B02C2400C51D08 /* VBPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VBPieChart.m; path = Classes/VBPieChart.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2C0FBA318B01DC000C51D08 /* QuartzCore.framework in Frameworks */,
 				D2C0FB6A18B01CBA00C51D08 /* CoreGraphics.framework in Frameworks */,
 				D2C0FB6C18B01CBA00C51D08 /* UIKit.framework in Frameworks */,
 				D2C0FB6818B01CBA00C51D08 /* Foundation.framework in Frameworks */,
@@ -103,6 +115,7 @@
 		D2C0FB6618B01CBA00C51D08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2C0FBA218B01DC000C51D08 /* QuartzCore.framework */,
 				D2C0FB6718B01CBA00C51D08 /* Foundation.framework */,
 				D2C0FB6918B01CBA00C51D08 /* CoreGraphics.framework */,
 				D2C0FB6B18B01CBA00C51D08 /* UIKit.framework */,
@@ -120,6 +133,12 @@
 				D2C0FB7C18B01CBA00C51D08 /* Main_iPad.storyboard */,
 				D2C0FB7F18B01CBA00C51D08 /* VBCViewController.h */,
 				D2C0FB8018B01CBA00C51D08 /* VBCViewController.m */,
+				D2C0FBB118B02C2400C51D08 /* VBPieChart.h */,
+				D2C0FBB218B02C2400C51D08 /* VBPieChart.m */,
+				D2C0FBAE18B02C0900C51D08 /* VBPiePiece.h */,
+				D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */,
+				D2C0FBAB18B022DA00C51D08 /* UIColor+HexColor.h */,
+				D2C0FBAC18B022DA00C51D08 /* UIColor+HexColor.m */,
 				D2C0FB8218B01CBA00C51D08 /* Images.xcassets */,
 				D2C0FB6E18B01CBA00C51D08 /* Supporting Files */,
 			);
@@ -256,7 +275,10 @@
 			files = (
 				D2C0FB7818B01CBA00C51D08 /* VBCAppDelegate.m in Sources */,
 				D2C0FB7418B01CBA00C51D08 /* main.m in Sources */,
+				D2C0FBAD18B022DA00C51D08 /* UIColor+HexColor.m in Sources */,
 				D2C0FB8118B01CBA00C51D08 /* VBCViewController.m in Sources */,
+				D2C0FBB318B02C2400C51D08 /* VBPieChart.m in Sources */,
+				D2C0FBB018B02C0900C51D08 /* VBPiePiece.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,10 +415,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Volodymyr Boichentsov (LD4K6T4M4Y)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Charts/Charts-Prefix.pch";
 				INFOPLIST_FILE = "Charts/Charts-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "132FC625-D004-4D9A-A2E6-A0B42B2176E9";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -406,10 +430,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Volodymyr Boichentsov (LD4K6T4M4Y)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Charts/Charts-Prefix.pch";
 				INFOPLIST_FILE = "Charts/Charts-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "132FC625-D004-4D9A-A2E6-A0B42B2176E9";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -475,6 +501,7 @@
 				D2C0FB9B18B01CBA00C51D08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D2C0FB9C18B01CBA00C51D08 /* Build configuration list for PBXNativeTarget "ChartsTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +510,7 @@
 				D2C0FB9E18B01CBA00C51D08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
