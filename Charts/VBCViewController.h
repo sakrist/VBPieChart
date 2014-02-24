@@ -10,4 +10,6 @@
 
 @interface VBCViewController : UIViewController
 
+- (IBAction)valueChangedSlider:(UISlider*)sender;
+
 @end
