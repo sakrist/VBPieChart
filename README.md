@@ -1,7 +1,7 @@
 Charts
 ======
 
-Charts iOS Control
+Charts iOS Control with animations
 
 
 <img src="https://raw.githubusercontent.com/sakrist/Charts/master/Screenshot.png">
