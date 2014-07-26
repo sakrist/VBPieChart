@@ -9,6 +9,14 @@
 #import "VBPieChart.h"
 #import "VBPiePiece.h"
 
+static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoint point2) {
+    
+    CGFloat dx = point2.x - point1.x;
+    CGFloat dy = point2.y - point1.y;
+    
+    return sqrt(dx*dx + dy*dy );
+}
+
 @interface VBPiePieceData : NSObject
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSNumber *value;
@@ -19,23 +27,45 @@
 @end
 
 
-@interface VBPieChart ()
+@interface VBPieChart () {
+    CGPoint moveP;
+}
 @property (nonatomic, retain) NSMutableArray *chartsData;
 @property (nonatomic) float radius;
 @property (nonatomic) float holeRadius;
+@property (nonatomic, weak) VBPiePiece *hitLayer;
+
+@property (nonatomic) BOOL presentWithAnimation;
+@property (nonatomic) VBPieChartAnimationOptions animationOptions;
+@property (nonatomic) float animationDuration;
+
+@end
+
+@interface VBPiePiece ()
+- (void) _animate;
+- (void) setAnimationOptions:(VBPieChartAnimationOptions)options;
+- (void) setAnimationDuration:(float)duration;
+@property (nonatomic, copy) void (^endAnimationBlock)(void);
 @end
 
 
-@implementation VBPieChart
+@implementation VBPieChart {
+    CGPoint _touchBegan;
+}
 
 - (id) init {
     self = [super init];
     self.chartsData = [NSMutableArray array];
     self.strokeColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.7];
+    
+    self.startAngle = 0;
+    self.length = M_PI*2;
+    self.radiusPrecent = 0.9;
     self.holeRadius = 0;
     self.holeRadiusPrecent = 0.2;
-    self.radiusPrecent = 0.9;
+    self.maxAccentPrecent = 0.25;
     self.enableStrokeColor = NO;
+    
     [self addObserver:self
            forKeyPath:@"chartValues"
               options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
@@ -99,15 +129,15 @@
     
     switch (index) {
         case 0:
-            return [UIColor colorWithRed:0.55+deltaRed green:0.77+deltaGreen blue:0.53+deltaBlue alpha:alpha];
+            return [UIColor colorWithRed:0.31+deltaRed green:0.74+deltaGreen blue:0.91+deltaBlue alpha:alpha];
         case 1:
             return [UIColor colorWithRed:0.33+deltaRed green:0.17+deltaGreen blue:0.48+deltaBlue alpha:alpha];
         case 2:
             return [UIColor colorWithRed:0.81+deltaRed green:0.61+deltaGreen blue:0.02+deltaBlue alpha:alpha];
         case 3:
-            return [UIColor colorWithRed:0.31+deltaRed green:0.74+deltaGreen blue:0.91+deltaBlue alpha:alpha];
-        case 4:
             return [UIColor colorWithRed:0.43+deltaRed green:0.02+deltaGreen blue:0.46+deltaBlue alpha:alpha];
+        case 4:
+            return [UIColor colorWithRed:0.55+deltaRed green:0.77+deltaGreen blue:0.53+deltaBlue alpha:alpha];
         case 5:
             return [UIColor colorWithRed:0.00+deltaRed green:0.51+deltaGreen blue:0.08+deltaBlue alpha:alpha];
         case 6:
@@ -122,6 +152,10 @@
 
 - (void) updateCharts {
 
+    if (!_chartValues) {
+        return;
+    }
+    
     // Clean old layers
     NSArray *arraySublayers = [NSArray arrayWithArray:self.layer.sublayers];
     for (CALayer *l in arraySublayers) {
@@ -172,8 +206,8 @@
     }
     
     double onePrecent = fullValue*0.01;
-    double onePrecentOfChart = M_PI*2*0.01;
-    double start = 0;
+    double onePrecentOfChart = _length*0.01;
+    double start = _startAngle;
     
     for (VBPiePieceData *data in _chartsData) {
         
@@ -186,7 +220,9 @@
         
         VBPiePiece *piece = [[VBPiePiece alloc] init];
         [piece setFrame:rect];
-        [piece setAccent:data.accent];
+        if (data.accent) {
+            [piece setAccentPrecent:0.1];
+        }
         [piece setInnerRadius:_radius];
         [piece setOuterRadius:_holeRadius];
         piece.fillColor = data.color.CGColor;
@@ -196,27 +232,136 @@
         }
         
         [piece pieceAngle:pieceChartValue start:start];
+        
+        if (_presentWithAnimation) {
+            [piece setHidden:YES];
+        }
+        [piece setAnimationDuration:_animationDuration];
+        [piece setAnimationOptions:_animationOptions];
+        
         [self.layer addSublayer:piece];
         
         start += pieceChartValue;
     }
-}
-
-- (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    if (_enableInteractive) {
-        UITouch *t = [[touches allObjects] lastObject];
-        CGPoint p1 = [t previousLocationInView:self];
-        CGPoint p2 = [t locationInView:self];
+    // if was selected present with animation
+    if (_presentWithAnimation) {
         
-        CGPoint delta;
-        delta.x = p1.x - p2.x;
-        delta.y = p1.y - p2.y;
+        if (_animationOptions & VBPieChartAnimationGrowthAll || _animationOptions & VBPieChartAnimationGrowthBackAll) {
+            
+            for (int i = 0, len = [self.layer sublayers].count; i < len; i++) {
+                VBPiePiece *piece = [[self.layer sublayers] objectAtIndex:i];
+                [piece _animate];
+            }
+            
+        } else {
+            
+            for (int i = 0, len = [self.layer sublayers].count; i < len; i++) {
+                VBPiePiece *piece = [[self.layer sublayers] objectAtIndex:i];
+                if (i+1 < len) {
+                    __block VBPiePiece *blockPiece = [[self.layer sublayers] objectAtIndex:i+1];
+                    [piece setEndAnimationBlock:^{
+                        [blockPiece _animate];
+                    }];
+                }
+            }
+            
+            VBPiePiece *piece = [[self.layer sublayers] objectAtIndex:0];
+            [piece _animate];
+        }
         
-        self.layer.transform = CATransform3DRotate(self.layer.transform, delta.y * M_PI / 180.0f, 1, 0, 0);
-        self.layer.transform = CATransform3DRotate(self.layer.transform, delta.x * M_PI / 180.0f, 0, -1, 0);
+        _presentWithAnimation = NO;
     }
 }
 
+
+- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation {
+    [self setChartValues:chartValues animation:animation options:(VBPieChartAnimationFan | VBPieChartAnimationTimingLinear)];
+}
+
+- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options {
+    [self setChartValues:chartValues animation:animation duration:0.7 options:options];
+}
+
+- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options {
+    _presentWithAnimation = animation;
+    _animationOptions = options;
+    _animationDuration = duration;
+    self.chartValues = chartValues;
+}
+
+
+- (CALayer *)layerForTouch:(UITouch *)touch {
+    CGPoint location = [touch locationInView:[touch view]];
+    
+    for (CALayer *l in self.layer.sublayers) {
+        if ([l containsPoint:location]) {
+            return l;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [touches anyObject];
+    _touchBegan = [touch locationInView:self];
+    _hitLayer = (VBPiePiece*)[self layerForTouch:touch];
+    
+    moveP = CGPointMake(1, 1);
+    CGPoint p = [touch locationInView:self];
+    if (p.y > self.center.y && p.x > self.center.x) {
+        moveP.y = -1;
+    }
+    if (p.y > self.center.y && p.x < self.center.x) {
+        moveP.y = -1;
+        moveP.x = -1;
+    }
+    if (p.y < self.center.y && p.x < self.center.x) {
+        moveP.y = 1;
+        moveP.x = -1;
+    }
+}
+
+
+- (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint p1 = [touch previousLocationInView:self];
+    CGPoint p2 = [touch locationInView:self];
+    CGPoint delta;
+    delta.x = (p1.x - p2.x)*moveP.x;
+    delta.y = (p1.y - p2.y)*moveP.y;
+    
+    if (_enableInteractive) {
+        self.layer.transform = CATransform3DRotate(self.layer.transform, delta.y * M_PI / 180.0f, 1, 0, 0);
+        self.layer.transform = CATransform3DRotate(self.layer.transform, delta.x * M_PI / 180.0f, 0, -1, 0);
+    }
+    
+    if ([_hitLayer isKindOfClass:[VBPiePiece class]]) {
+        float d = _hitLayer.accentPrecent+((-delta.x+delta.y)/2/_radius);
+        d = MAX(0, d);
+        d = MIN(d, _maxAccentPrecent);
+
+        [_hitLayer setAccentPrecent:d];
+    }
+}
+
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self];
+    if (CGPointDistanceBetweenTwoPoints(point, _touchBegan) < 5) {
+        _hitLayer = (VBPiePiece*)[self layerForTouch:touch];
+        
+        if (_hitLayer.accentPrecent < FLT_EPSILON) {
+            [_hitLayer animateToAccent:_maxAccentPrecent];
+        } else {
+            [_hitLayer animateToAccent:0];
+        }
+    }
+}
 
 @end
