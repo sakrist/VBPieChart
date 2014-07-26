@@ -98,10 +98,10 @@
         _currentMatrix = matrix;
         
 #if DEBUG
-        CALayer *layer = [CALayer layer];
-        [layer setFrame:CGRectMake(center.x+_accentVector.x*size.width/2, center.y+_accentVector.y*size.height/2, 2, 2)];
-        layer.backgroundColor = [UIColor redColor].CGColor;
-        [self addSublayer:layer];
+//        CALayer *layer = [CALayer layer];
+//        [layer setFrame:CGRectMake(center.x+_accentVector.x*size.width/2, center.y+_accentVector.y*size.height/2, 2, 2)];
+//        layer.backgroundColor = [UIColor redColor].CGColor;
+//        [self addSublayer:layer];
 #endif
     }
     
@@ -112,7 +112,7 @@
 }
 
 
-- (void)createArcAnimationForKey:(NSString *)key fromValue:(NSNumber *)from toValue:(NSNumber *)to delegate:(id)delegate {
+- (void) createArcAnimationForKey:(NSString *)key fromValue:(NSNumber *)from toValue:(NSNumber *)to delegate:(id)delegate {
     CABasicAnimation *arcAnimation = [CABasicAnimation animationWithKeyPath:key];
     [arcAnimation setFromValue:from];
     [arcAnimation setToValue:to];
@@ -140,7 +140,7 @@
     [self setValue:to forKey:key];
 }
 
-+ (BOOL)needsDisplayForKey:(NSString*)key {
++ (BOOL) needsDisplayForKey:(NSString*)key {
     if ([key isEqualToString:@"endAngle"] || [key isEqualToString:@"startAngle"] || [key isEqualToString:@"innerRadius"]|| [key isEqualToString:@"outerRadius"]) {
         return YES;
     } else {
@@ -148,7 +148,7 @@
     }
 }
 
-- (void)drawInContext:(CGContextRef)ctx {
+- (void) drawInContext:(CGContextRef)ctx {
     
     CAAnimation *arcAnimation = [self animationForKey:@"endAngle"];
     if (arcAnimation) {
@@ -168,14 +168,13 @@
         VBPiePiece *p = arcAnimation.delegate;
         [p __outerRadius:_outerRadius];
     }
-//    [super drawInContext:ctx];
 }
 
 
 
-- (void)animationDidStart:(CAAnimation *)anim { }
+- (void) animationDidStart:(CAAnimation *)anim { }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+- (void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     if ([((CABasicAnimation*)anim).keyPath isEqualToString:@"endAngle"]) {
         [self __angle:_endAngle];
     }
@@ -267,7 +266,7 @@
 
 
 
-- (BOOL)containsPoint:(CGPoint)point {
+- (BOOL) containsPoint:(CGPoint)point {
     return CGPathContainsPoint(self.path, NULL, point, false);
 }
 

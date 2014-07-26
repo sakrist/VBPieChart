@@ -65,8 +65,7 @@
 //    [_chart setEnableInteractive:YES];
     [_chart setHoleRadiusPrecent:0.3];
     NSDictionary *chartValues = @{
-//                         @"first2":  @{@"value":@30, @"accent":@YES},
-//                          @"first":  @{@"value":@30, @"accent":@YES},
+
                            @"firsts":  @{@"value":@35 },
                            @"first 2":  @{@"value":@20 },
                            @"first 3":  @{@"value":@10 },
@@ -74,22 +73,6 @@
                            @"second": @20,
                            @"third": @40,
                            @"fourth": @10,
-//                           @"fourth 2": @70,
-//                           @"fourth 3": @65,
-//                           @"fourth 4": @23,
-//                           @"fourth 5": @34,
-//                           @"fourtdh 6": @54,
-//                           @"fiftdh 3": @30,
-//                           @"firsdt 3": @50,
-//                           @"second asdf": @20,
-//                           @"thirdds": @40,
-//                           @"fourthasd": @10,
-//                           @"fourthsdf 2": @70,
-//                           @"foursth 3": @65,
-//                           @"fourthsf 4": @23,
-//                           @"fourftfsh 5": @34,
-//                           @"fourtfh 6": @54,
-//                           @"fiftfsfh 3": @30
                            };
 
     [_chart setChartValues:chartValues animation:YES];
@@ -189,6 +172,9 @@
         _chart.length = M_PI;
         _chart.startAngle = M_PI;
     }
+    
+    [_chart setChartValues:_chart.chartValues animation:YES];
+    
 }
 
 
