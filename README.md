@@ -1,4 +1,4 @@
-Charts
+VBPieChart
 ======
 
 Charts iOS Control with animations
