@@ -33,7 +33,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 @property (nonatomic, retain) NSMutableArray *chartsData;
 @property (nonatomic) float radius;
 @property (nonatomic) float holeRadius;
-@property (nonatomic, weak) VBPiePiece *hitLayer;
+@property (nonatomic, assign) VBPiePiece *hitLayer;
 
 @property (nonatomic) BOOL presentWithAnimation;
 @property (nonatomic) VBPieChartAnimationOptions animationOptions;
