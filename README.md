@@ -8,7 +8,7 @@ Charts iOS Control with animations
 
 ======
 
-Version: 0.1.1
+Version: 0.2.0
 ======
 
 License: [MIT](http://opensource.org/licenses/MIT)
