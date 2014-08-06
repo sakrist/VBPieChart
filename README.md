@@ -4,7 +4,7 @@ VBPieChart
 Charts iOS Control with animations
 
 
-<img src="https://raw.githubusercontent.com/sakrist/Charts/master/Screenshot.png">
+<img src="https://github.com/sakrist/VBPieChart/blob/master/demonstration.gif">
 
 ======
 
