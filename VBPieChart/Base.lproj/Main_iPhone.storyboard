@@ -18,63 +18,73 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6PQ-n3-TNT">
-                                <rect key="frame" x="109" y="474" width="67" height="30"/>
+                                <rect key="frame" x="98" y="398" width="67" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="GrowthAll">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="setanother:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0o3-3E-H4E"/>
+                                    <action selector="growthAll:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0O7-fu-sBK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SnN-vn-5cz">
-                                <rect key="frame" x="200" y="474" width="51" height="30"/>
+                                <rect key="frame" x="106" y="425" width="51" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Growth">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="setanother1:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="UFe-H3-cXL"/>
+                                    <action selector="growth:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cJZ-gF-aY5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ov-xY-93T">
-                                <rect key="frame" x="281" y="474" width="30" height="30"/>
+                                <rect key="frame" x="233" y="364" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Fan">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="setanother2:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="x0C-rf-9xB"/>
+                                    <action selector="fan:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gyL-gB-arl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0B-dw-0dJ">
-                                <rect key="frame" x="109" y="531" width="67" height="30"/>
+                                <rect key="frame" x="78" y="371" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="GrowthAll">
+                                <state key="normal" title="GrowthAll Back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="setanother3:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="K8q-9m-wlJ"/>
+                                    <action selector="growthBackAll:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Eek-7Z-NAg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9z-WC-kR1">
-                                <rect key="frame" x="200" y="531" width="51" height="30"/>
+                                <rect key="frame" x="86" y="453" width="90" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Growth">
+                                <state key="normal" title="Growth Back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="setanother4:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="b5e-fP-6QJ"/>
+                                    <action selector="growthBack:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nsz-n9-vlp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FMo-zA-AdI">
-                                <rect key="frame" x="20" y="474" width="30" height="30"/>
+                                <rect key="frame" x="20" y="371" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Full">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="changeLenght:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5LT-me-Vk7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiT-rc-L4Q">
+                                <rect key="frame" x="227" y="392" width="43" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="FanAll">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fanAll:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7Ki-g8-cE6"/>
                                 </connections>
                             </button>
                         </subviews>

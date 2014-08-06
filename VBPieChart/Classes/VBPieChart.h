@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_OPTIONS(NSUInteger, VBPieChartAnimationOptions) {
-    VBPieChartAnimationFan                        = 1 <<  0, // default
+    VBPieChartAnimationFanAll                     = 1 <<  0, // default
     VBPieChartAnimationGrowth                     = 1 <<  1,
     VBPieChartAnimationGrowthAll                  = 1 <<  2,
     VBPieChartAnimationGrowthBack                 = 1 <<  3,
     VBPieChartAnimationGrowthBackAll              = 1 <<  4,
+    VBPieChartAnimationFan                        = 1 <<  5,
     
     VBPieChartAnimationTimingEaseInOut            = 1 << 16,
     VBPieChartAnimationTimingEaseIn               = 2 << 16,

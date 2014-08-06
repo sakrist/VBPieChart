@@ -15,6 +15,8 @@
 @interface VBCViewController ()
 
 @property (nonatomic, retain) VBPieChart *chart;
+
+@property (nonatomic, retain) NSDictionary *chartValues;
 @end
 
 @implementation VBCViewController
@@ -54,115 +56,64 @@
     }
     [_chart setFrame:CGRectMake(10, 50, 300, 300)];
     [_chart setEnableStrokeColor:YES];
-    _chart.length = M_PI;
-    _chart.startAngle = M_PI;
+    _chart.length = M_PI*2;
+    _chart.startAngle = 0;
     
     [_chart.layer setShadowOffset:CGSizeMake(2, 2)];
     [_chart.layer setShadowRadius:3];
     [_chart.layer setShadowColor:[UIColor blackColor].CGColor];
     [_chart.layer setShadowOpacity:0.7];
     
-//    [_chart setEnableInteractive:YES];
     [_chart setHoleRadiusPrecent:0.3];
-    NSDictionary *chartValues = @{
-
-                           @"firsts":  @{@"value":@35 },
-                           @"first 2":  @{@"value":@20 },
-                           @"first 3":  @{@"value":@10 },
-                           @"first ":  @{@"value":@40},
-                           @"second": @20,
-                           @"third": @40,
-                           @"fourth": @10,
-                           };
-
-    [_chart setChartValues:chartValues animation:YES];
-//    [_chart setChartValues:chartValues animation:YES options:VBPieChartAnimationGrowth];
+    
+    self.chartValues = @{
+                         @"first": @{@"value":@50, @"color":[UIColor colorWithHexString:@"#dd191d"]},
+                         @"second": @{@"value":@20, @"color":[UIColor colorWithHexString:@"#d81b60"]},
+                         @"third": @{@"value":@40, @"color":[UIColor colorWithHexString:@"#8e24aa"]},
+                         @"fourth 2": @{@"value":@70, @"color":[UIColor colorWithHexString:@"#3f51b5"]},
+                         @"fourth 3": @{@"value":@65, @"color":[UIColor colorWithHexString:@"#5677fc"]},
+                         @"fourth 4": @{@"value":@23, @"color":[UIColor colorWithHexString:@"#2baf2b"]},
+                         @"fourth 5": @{@"value":@34, @"color":[UIColor colorWithHexString:@"#b0bec5"]},
+                         @"fourth 6": @{@"value":@54, @"color":[UIColor colorWithHexString:@"#f57c00"]}
+                         };
+    
+    [_chart setChartValues:_chartValues animation:YES];
     
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
 
-- (IBAction)setanother:(id)sender {
-    NSDictionary *chartValues = @{
-                           @"first": @{@"value":@50, @"color":[UIColor colorWithRed:0.55 green:0.77 blue:0.53 alpha:1.0]},
-                           @"second": @{@"value":@20, @"color":[UIColor colorWithRed:0.33 green:0.17 blue:0.48 alpha:1.0]},
-                           @"third": @{@"value":@40, @"color":[UIColor colorWithRed:0.81 green:0.61 blue:0.02 alpha:1.0]},
-                           @"fourth": @{@"value":@10, @"color":[UIColor colorWithRed:0.31 green:0.74 blue:0.91 alpha:1.0]},
-                           @"fourth 2": @{@"value":@70, @"color":[UIColor colorWithRed:0.43 green:0.02 blue:0.46 alpha:1.0]},
-                           @"fourth 3": @{@"value":@65, @"color":[UIColor colorWithRed:0.00 green:0.51 blue:0.08 alpha:1.0]},
-                           @"fourth 4": @{@"value":@23, @"color":[UIColor colorWithRed:0.84 green:0.66 blue:0.81 alpha:1.0]},
-                           @"fourth 5": @{@"value":@34, @"color":[UIColor colorWithRed:0.73 green:0.20 blue:0.63 alpha:1.0]},
-                           @"fourth 6": @{@"value":@54, @"color":[UIColor colorWithRed:0.83 green:0.20 blue:0.15 alpha:1.0]}
-                           };
+- (IBAction) growthAll:(id)sender {
     
-    [_chart setChartValues:chartValues animation:YES options:VBPieChartAnimationGrowthAll | VBPieChartAnimationTimingEaseInOut];
+    [_chart setChartValues:_chartValues animation:YES options:VBPieChartAnimationGrowthAll | VBPieChartAnimationTimingEaseInOut];
 }
 
-- (IBAction)setanother1:(id)sender {
-    NSDictionary *chartValues = @{
-                                  @"first": @{@"value":@50, @"color":[UIColor colorWithRed:0.55 green:0.77 blue:0.53 alpha:1.0]},
-                                  @"second": @{@"value":@20, @"color":[UIColor colorWithRed:0.33 green:0.17 blue:0.48 alpha:1.0]},
-                                  @"third": @{@"value":@40, @"color":[UIColor colorWithRed:0.81 green:0.61 blue:0.02 alpha:1.0]},
-                                  @"fourth": @{@"value":@10, @"color":[UIColor colorWithRed:0.31 green:0.74 blue:0.91 alpha:1.0]},
-                                  @"fourth 2": @{@"value":@70, @"color":[UIColor colorWithRed:0.43 green:0.02 blue:0.46 alpha:1.0]},
-                                  @"fourth 3": @{@"value":@65, @"color":[UIColor colorWithRed:0.00 green:0.51 blue:0.08 alpha:1.0]},
-                                  @"fourth 4": @{@"value":@23, @"color":[UIColor colorWithRed:0.84 green:0.66 blue:0.81 alpha:1.0]},
-                                  @"fourth 5": @{@"value":@34, @"color":[UIColor colorWithRed:0.73 green:0.20 blue:0.63 alpha:1.0]},
-                                  @"fourth 6": @{@"value":@54, @"color":[UIColor colorWithRed:0.83 green:0.20 blue:0.15 alpha:1.0]}
-                                  };
+- (IBAction) growth:(id)sender {
     
-    [_chart setChartValues:chartValues animation:YES options:VBPieChartAnimationGrowth];
+    [_chart setChartValues:_chartValues animation:YES duration:1.0 options:VBPieChartAnimationGrowth];
 }
 
-- (IBAction)setanother3:(id)sender {
-    NSDictionary *chartValues = @{
-                                  @"first": @{@"value":@50, @"color":[UIColor colorWithRed:0.55 green:0.77 blue:0.53 alpha:1.0]},
-                                  @"second": @{@"value":@20, @"color":[UIColor colorWithRed:0.33 green:0.17 blue:0.48 alpha:1.0]},
-                                  @"third": @{@"value":@40, @"color":[UIColor colorWithRed:0.81 green:0.61 blue:0.02 alpha:1.0]},
-                                  @"fourth": @{@"value":@10, @"color":[UIColor colorWithRed:0.31 green:0.74 blue:0.91 alpha:1.0]},
-                                  @"fourth 2": @{@"value":@70, @"color":[UIColor colorWithRed:0.43 green:0.02 blue:0.46 alpha:1.0]},
-                                  @"fourth 3": @{@"value":@65, @"color":[UIColor colorWithRed:0.00 green:0.51 blue:0.08 alpha:1.0]},
-                                  @"fourth 4": @{@"value":@23, @"color":[UIColor colorWithRed:0.84 green:0.66 blue:0.81 alpha:1.0]},
-                                  @"fourth 5": @{@"value":@34, @"color":[UIColor colorWithRed:0.73 green:0.20 blue:0.63 alpha:1.0]},
-                                  @"fourth 6": @{@"value":@54, @"color":[UIColor colorWithRed:0.83 green:0.20 blue:0.15 alpha:1.0]}
-                                  };
+- (IBAction) growthBackAll:(id)sender {
     
-    [_chart setChartValues:chartValues animation:YES options:VBPieChartAnimationGrowthBackAll | VBPieChartAnimationTimingEaseInOut];
+    [_chart setChartValues:_chartValues animation:YES options:VBPieChartAnimationGrowthBackAll | VBPieChartAnimationTimingEaseInOut];
 }
 
-- (IBAction)setanother4:(id)sender {
-    NSDictionary *chartValues = @{
-                                  @"first": @{@"value":@50, @"color":[UIColor colorWithRed:0.55 green:0.77 blue:0.53 alpha:1.0]},
-                                  @"second": @{@"value":@20, @"color":[UIColor colorWithRed:0.33 green:0.17 blue:0.48 alpha:1.0]},
-                                  @"third": @{@"value":@40, @"color":[UIColor colorWithRed:0.81 green:0.61 blue:0.02 alpha:1.0]},
-                                  @"fourth": @{@"value":@10, @"color":[UIColor colorWithRed:0.31 green:0.74 blue:0.91 alpha:1.0]},
-                                  @"fourth 2": @{@"value":@70, @"color":[UIColor colorWithRed:0.43 green:0.02 blue:0.46 alpha:1.0]},
-                                  @"fourth 3": @{@"value":@65, @"color":[UIColor colorWithRed:0.00 green:0.51 blue:0.08 alpha:1.0]},
-                                  @"fourth 4": @{@"value":@23, @"color":[UIColor colorWithRed:0.84 green:0.66 blue:0.81 alpha:1.0]},
-                                  @"fourth 5": @{@"value":@34, @"color":[UIColor colorWithRed:0.73 green:0.20 blue:0.63 alpha:1.0]},
-                                  @"fourth 6": @{@"value":@54, @"color":[UIColor colorWithRed:0.83 green:0.20 blue:0.15 alpha:1.0]}
-                                  };
+- (IBAction) growthBack:(id)sender {
     
-    [_chart setChartValues:chartValues animation:YES options:VBPieChartAnimationGrowthBack];
+    [_chart setChartValues:_chartValues animation:YES duration:1.0 options:VBPieChartAnimationGrowthBack];
 }
 
 
-- (IBAction)setanother2:(id)sender {
-    NSDictionary *chartValues = @{
-                                  @"first": @{@"value":@50, @"color":[UIColor colorWithRed:0.55 green:0.77 blue:0.53 alpha:1.0]},
-                                  @"second": @{@"value":@20, @"color":[UIColor colorWithRed:0.33 green:0.17 blue:0.48 alpha:1.0]},
-                                  @"third": @{@"value":@40, @"color":[UIColor colorWithRed:0.81 green:0.61 blue:0.02 alpha:1.0]},
-                                  @"fourth": @{@"value":@10, @"color":[UIColor colorWithRed:0.31 green:0.74 blue:0.91 alpha:1.0]},
-                                  @"fourth 2": @{@"value":@70, @"color":[UIColor colorWithRed:0.43 green:0.02 blue:0.46 alpha:1.0]},
-                                  @"fourth 3": @{@"value":@65, @"color":[UIColor colorWithRed:0.00 green:0.51 blue:0.08 alpha:1.0]},
-                                  @"fourth 4": @{@"value":@23, @"color":[UIColor colorWithRed:0.84 green:0.66 blue:0.81 alpha:1.0]},
-                                  @"fourth 5": @{@"value":@34, @"color":[UIColor colorWithRed:0.73 green:0.20 blue:0.63 alpha:1.0]},
-                                  @"fourth 6": @{@"value":@54, @"color":[UIColor colorWithRed:0.83 green:0.20 blue:0.15 alpha:1.0]}
-                                  };
+- (IBAction) fan:(id)sender {
     
-    [_chart setChartValues:chartValues animation:YES options:VBPieChartAnimationFan];
+    [_chart setChartValues:_chartValues animation:YES duration:0.35 options:VBPieChartAnimationFan];
 }
 
+
+- (IBAction) fanAll:(id)sender {
+
+    [_chart setChartValues:_chartValues animation:YES options:VBPieChartAnimationFanAll];
+}
 
 - (IBAction) changeLenght:(id)sender {
     if (_chart.length < M_PI*2-0.01) {

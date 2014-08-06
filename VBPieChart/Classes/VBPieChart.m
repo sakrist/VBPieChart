@@ -247,7 +247,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     // if was selected present with animation
     if (_presentWithAnimation) {
         
-        if (_animationOptions & VBPieChartAnimationGrowthAll || _animationOptions & VBPieChartAnimationGrowthBackAll) {
+        if (_animationOptions & VBPieChartAnimationGrowthAll || _animationOptions & VBPieChartAnimationGrowthBackAll || _animationOptions & VBPieChartAnimationFan) {
             
             for (int i = 0, len = [self.layer sublayers].count; i < len; i++) {
                 VBPiePiece *piece = [[self.layer sublayers] objectAtIndex:i];
@@ -276,7 +276,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 
 
 - (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation {
-    [self setChartValues:chartValues animation:animation options:(VBPieChartAnimationFan | VBPieChartAnimationTimingLinear)];
+    [self setChartValues:chartValues animation:animation options:(VBPieChartAnimationFanAll | VBPieChartAnimationTimingLinear)];
 }
 
 - (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options {

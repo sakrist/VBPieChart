@@ -116,11 +116,13 @@
     CABasicAnimation *arcAnimation = [CABasicAnimation animationWithKeyPath:key];
     [arcAnimation setFromValue:from];
     [arcAnimation setToValue:to];
-    if (_animationOptions & VBPieChartAnimationFan) {
+    if (_animationOptions & VBPieChartAnimationFanAll) {
         arcAnimation.duration = _animationDuration/((M_PI*2)/_angle);
     } else if (_animationOptions & VBPieChartAnimationGrowth || _animationOptions & VBPieChartAnimationGrowthBack) {
         arcAnimation.duration = _animationDuration/(float)[[self.superlayer sublayers] count];
     } else if (_animationOptions & VBPieChartAnimationGrowthAll || _animationOptions & VBPieChartAnimationGrowthBackAll) {
+        arcAnimation.duration = _animationDuration;
+    } else if (_animationOptions & VBPieChartAnimationFan) {
         arcAnimation.duration = _animationDuration;
     }
     
@@ -192,7 +194,7 @@
 }
 
 - (void) _animate {
-    if (_animationOptions & VBPieChartAnimationFan) {
+    if (_animationOptions & VBPieChartAnimationFan || _animationOptions & VBPieChartAnimationFanAll) {
         [self createArcAnimationForKey:@"endAngle"
                              fromValue:[NSNumber numberWithFloat:0]
                                toValue:[NSNumber numberWithFloat:_angle]
