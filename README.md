@@ -36,11 +36,11 @@ Animation options:
 For:<br />
     `- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`
 
+--
 
-Version: 0.2.0
------
-
+Version: 0.2.0<br>
 License: [MIT](http://opensource.org/licenses/MIT)
------
+
+--
 
 Twitter: [@SAKrisT](https://twitter.com/SAKrisT)
