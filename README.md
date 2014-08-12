@@ -16,8 +16,6 @@ Usage
     [chart setEnableStrokeColor:YES];
     [chart setHoleRadiusPrecent:0.3]; /* hole inside of chart */
     NSDictionary *chartValues = @{...};
-    [chart setChartValues:chartValues animation:YES duration:0.7 options:(VBPieChartAnimationFanAll | VBPieChartAnimationTimingLinear)];
-    /* similar to default */
     [chart setChartValues:chartValues animation:YES];
     
 
@@ -30,11 +28,13 @@ Animation options:
 * `VBPieChartAnimationGrowthBack`
 * `VBPieChartAnimationGrowthBackAll`
 * `VBPieChartAnimationFan`
-
 * `VBPieChartAnimationTimingEaseInOut`
 * `VBPieChartAnimationTimingEaseIn`
 * `VBPieChartAnimationTimingEaseOut`
 * `VBPieChartAnimationTimingLinea`
+
+For:<br />
+    `- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`
 
 
 Version: 0.2.0
