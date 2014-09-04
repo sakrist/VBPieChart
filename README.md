@@ -15,7 +15,7 @@ Usage
     [chart setFrame:CGRectMake(10, 50, 300, 300)];
     [chart setEnableStrokeColor:YES];
     [chart setHoleRadiusPrecent:0.3]; /* hole inside of chart */
-    NSDictionary *chartValues = @{...};
+    NSArray *chartValues = @[...];
     [chart setChartValues:chartValues animation:YES];
     
 
@@ -34,7 +34,7 @@ Animation options:
 * `VBPieChartAnimationTimingLinea`
 
 For:<br />
-    `- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`
+    `- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`
 
 --
 
