@@ -16,7 +16,7 @@
 
 @property (nonatomic, retain) VBPieChart *chart;
 
-@property (nonatomic, retain) NSDictionary *chartValues;
+@property (nonatomic, retain) NSArray *chartValues;
 @end
 
 @implementation VBCViewController
@@ -27,11 +27,12 @@
     switch (sender.tag) {
         case 0: {
 //            [_chart setFrame:CGRectMake(100, 100, value, value)];
-            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:_chart.chartValues];
+            NSMutableArray *array = [NSMutableArray arrayWithArray:_chart.chartValues];
             
-            NSString *key = [[dict allKeys] objectAtIndex:sender.tag];
-            [dict setObject:[NSNumber numberWithFloat:sender.value] forKey:key];
-            _chart.chartValues = dict;
+            NSMutableDictionary *object = [NSMutableDictionary dictionaryWithDictionary:[array objectAtIndex:sender.tag]];
+            [object setObject:[NSNumber numberWithFloat:sender.value] forKey:@"value"];
+            [array replaceObjectAtIndex:sender.tag withObject:object];
+            _chart.chartValues = array;
         }
             break;
             
@@ -64,16 +65,16 @@
     [_chart.layer setShadowOpacity:0.7];
     
     
-    self.chartValues = @{
-                         @"first": @{@"value":@50, @"color":[UIColor colorWithHexString:@"#dd191d"]},
-                         @"second": @{@"value":@20, @"color":[UIColor colorWithHexString:@"#d81b60"]},
-                         @"third": @{@"value":@40, @"color":[UIColor colorWithHexString:@"#8e24aa"]},
-                         @"fourth 2": @{@"value":@70, @"color":[UIColor colorWithHexString:@"#3f51b5"]},
-                         @"fourth 3": @{@"value":@65, @"color":[UIColor colorWithHexString:@"#5677fc"]},
-                         @"fourth 4": @{@"value":@23, @"color":[UIColor colorWithHexString:@"#2baf2b"]},
-                         @"fourth 5": @{@"value":@34, @"color":[UIColor colorWithHexString:@"#b0bec5"]},
-                         @"fourth 6": @{@"value":@54, @"color":[UIColor colorWithHexString:@"#f57c00"]}
-                         };
+    self.chartValues = @[
+                         @{@"name":@"first", @"value":@50,@"value":@50, @"color":[UIColor colorWithHex:0xdd191daa]},
+                         @{@"name":@"second", @"value":@20, @"color":[UIColor colorWithHex:0xd81b60aa]},
+                         @{@"name":@"third", @"value":@40, @"color":[UIColor colorWithHex:0x8e24aaaa]},
+                         @{@"name":@"fourth 2", @"value":@70, @"color":[UIColor colorWithHex:0x3f51b5aa]},
+                         @{@"name":@"fourth 3", @"value":@65, @"color":[UIColor colorWithHex:0x5677fcaa]},
+                         @{@"name":@"fourth 4", @"value":@23, @"color":[UIColor colorWithHex:0x2baf2baa]},
+                         @{@"name":@"fourth 5", @"value":@34, @"color":[UIColor colorWithHex:0xb0bec5aa]},
+                         @{@"name":@"fourth 6", @"value":@54, @"color":[UIColor colorWithHex:0xf57c00aa]}
+                         ];
     
     [_chart setChartValues:_chartValues animation:YES];
     

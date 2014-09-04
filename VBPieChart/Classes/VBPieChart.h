@@ -25,7 +25,7 @@ typedef NS_OPTIONS(NSUInteger, VBPieChartAnimationOptions) {
 
 @interface VBPieChart : UIView
 
-@property (nonatomic, strong) NSDictionary *chartValues;
+@property (nonatomic, strong) NSArray *chartValues;
 
 @property (nonatomic, strong) UIColor *strokeColor;
 
@@ -53,10 +53,10 @@ typedef NS_OPTIONS(NSUInteger, VBPieChartAnimationOptions) {
 // Start angle
 @property (nonatomic) float startAngle;
 
-- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation;
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation;
 
-- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options;
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options;
 
-- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;
 
 @end
