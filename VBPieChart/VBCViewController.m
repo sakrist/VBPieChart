@@ -57,14 +57,14 @@
     }
     [_chart setFrame:CGRectMake(10, 50, 300, 300)];
     [_chart setEnableStrokeColor:YES];
-    _chart.length = M_PI*2;
-    _chart.startAngle = 0;
+    [_chart setHoleRadiusPrecent:0.3];
     
     [_chart.layer setShadowOffset:CGSizeMake(2, 2)];
     [_chart.layer setShadowRadius:3];
     [_chart.layer setShadowColor:[UIColor blackColor].CGColor];
     [_chart.layer setShadowOpacity:0.7];
     
+
     [_chart setHoleRadiusPrecent:0.3];
 //    [_chart setShowLabels:YES];
     
