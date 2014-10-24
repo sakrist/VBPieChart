@@ -14,7 +14,7 @@
 		<string>https://github.com/sakrist/VBPieChart.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>VBPieChart.xcodeproj/project.xcworkspace</string>
+	<string>VBPieChart.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>FE7A0895C8E7B46959881C0DD835B145AE019A7D</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>FE7A0895C8E7B46959881C0DD835B145AE019A7D</string>
 			<key>IDESourceControlWCCName</key>
-			<string>VBPieChart</string>
+			<string>VBPieChart%202</string>
 		</dict>
 	</array>
 </dict>

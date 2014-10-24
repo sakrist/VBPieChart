@@ -154,6 +154,11 @@
 				CLASSPREFIX = VBC;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = SAKrisT;
+				TargetAttributes = {
+					D2C0FB6318B01CBA00C51D08 = {
+						DevelopmentTeam = DHKZ7WR43P;
+					};
+				};
 			};
 			buildConfigurationList = D2C0FB5F18B01CBA00C51D08 /* Build configuration list for PBXProject "VBPieChart" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -310,13 +315,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VBPieChart/VBPieChart-Prefix.pch";
 				INFOPLIST_FILE = "VBPieChart/VBPieChart-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = VBPieChart;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d4b6b8df-492b-40c6-a9d3-af68df5f5f30";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -326,13 +331,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VBPieChart/VBPieChart-Prefix.pch";
 				INFOPLIST_FILE = "VBPieChart/VBPieChart-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = VBPieChart;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d4b6b8df-492b-40c6-a9d3-af68df5f5f30";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

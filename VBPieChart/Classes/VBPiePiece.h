@@ -13,6 +13,8 @@
 @property (nonatomic) float innerRadius;
 @property (nonatomic) float outerRadius;
 
+@property (nonatomic) double value;
+
 @property (nonatomic, readonly) float angle;
 @property (nonatomic, readonly) float startAngle;
 
@@ -21,6 +23,7 @@
 
 // Default is 0.1 (i.e. 10%) of innerRadius
 @property (nonatomic) float accentPrecent;
+
 
 - (BOOL) animateToAccent:(float)accentPrecent;
 

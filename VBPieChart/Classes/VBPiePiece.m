@@ -22,6 +22,11 @@
 
 @property (nonatomic) VBPieChartAnimationOptions animationOptions;
 @property (nonatomic) float animationDuration;
+
+@property (nonatomic) BOOL showLabel;
+
+@property (nonatomic, strong) CATextLayer *label;
+
 @end
 
 
@@ -35,7 +40,21 @@
     self.innerRadius = 0;
     self.accentPrecent = 0.0;
     self.endAnimationBlock = nil;
+    
+    self.label = [[CATextLayer alloc] init];
+    self.label.fontSize = 10;
+    self.label.alignmentMode = kCAAlignmentCenter;
+    self.label.foregroundColor = [UIColor blackColor].CGColor;
     return self;
+}
+
+- (void) setValue:(double)value {
+    _value = value;
+    if (value >= 0.04 && _showLabel) {
+        [self.label setString:[NSString stringWithFormat:@"%0.0f%%", self.value ]];
+    } else {
+        [self.label setHidden:YES];
+    }
 }
 
 - (void) setAccentPrecent:(float)accentPrecent {
@@ -231,6 +250,27 @@
     return path;
 }
 
+- (void) setPath:(CGPathRef)path {
+    [super setPath:path];
+    
+    if (_showLabel) {
+        CGRect rect = CGPathGetPathBoundingBox(path);
+        CGSize size = self.frame.size;
+        CGPoint center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        center = CGPointMake(center.x+_accentVector.x*size.width/4+_accentValue, center.y+_accentVector.y*size.height/4+_accentValue);
+        
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        if (CGRectContainsPoint(rect, center)) {
+            [self.label setPosition:center];
+            [self.label setHidden:NO];
+        } else {
+            [self.label setHidden:YES];
+        }
+        [CATransaction commit];
+    }
+}
+
 
 - (BOOL) animateToAccent:(float)accentPrecent {
 
@@ -266,7 +306,11 @@
     return YES;
 }
 
-
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self.label setFrame:CGRectMake(0, 0, 20, 20)];
+    [self addSublayer:_label];
+}
 
 - (BOOL) containsPoint:(CGPoint)point {
     return CGPathContainsPoint(self.path, NULL, point, false);

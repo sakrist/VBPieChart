@@ -45,6 +45,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 - (void) _animate;
 - (void) setAnimationOptions:(VBPieChartAnimationOptions)options;
 - (void) setAnimationDuration:(float)duration;
+- (void) setShowLabel:(BOOL)value;
 @property (nonatomic, copy) void (^endAnimationBlock)(void);
 @end
 
@@ -111,7 +112,13 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     [self updateCharts];
 }
 
-- (UIColor*) defaultColors:(int)index {
+- (void) setShowLabels:(BOOL)showLabels {
+    _showLabels = showLabels;
+    [self updateCharts];
+}
+
+
+- (UIColor*) defaultColors:(NSInteger)index {
     
     // It's better then just a random
 
@@ -168,8 +175,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     double fullValue = 0;
     
     NSUInteger index = 0;
-    for (NSString *key in _chartValues) {
-        id object = [_chartValues objectForKey:key];
+    for (NSDictionary *object in _chartValues) {
         
         VBPiePieceData *data;
         BOOL created = NO;
@@ -179,10 +185,10 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
             data = [[VBPiePieceData alloc] init];
             created = YES;
         }
-        data.name = key;
         
         if ([object isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dict = (NSDictionary*)object;
+            data.name = [dict objectForKey:@"name"];
             data.value = [dict objectForKey:@"value"];
             if (![dict objectForKey:@"color"]) {
                 data.color = [self defaultColors:index];
@@ -191,7 +197,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
             }
             data.accent = [[dict objectForKey:@"accent"] boolValue];
         } else {
-            data.value = object;
+            data.value = (NSNumber*)object;
             if (created) {
                 data.color = [self defaultColors:index];
             }
@@ -208,10 +214,10 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     double onePrecent = fullValue*0.01;
     double onePrecentOfChart = _length*0.01;
     double start = _startAngle;
-    
+
     for (VBPiePieceData *data in _chartsData) {
         
-        double pieceValuePrecents = fabsf([data.value floatValue])/onePrecent;
+        double pieceValuePrecents = fabsf([data.value doubleValue])/onePrecent;
         double pieceChartValue = onePrecentOfChart*pieceValuePrecents;
         
         if (pieceChartValue == 0) {
@@ -223,6 +229,10 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
         if (data.accent) {
             [piece setAccentPrecent:0.1];
         }
+        
+        [piece setShowLabel:_showLabels];
+        [piece setValue:pieceValuePrecents];
+        
         [piece setInnerRadius:_radius];
         [piece setOuterRadius:_holeRadius];
         piece.fillColor = data.color.CGColor;
@@ -249,14 +259,14 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
         
         if (_animationOptions & VBPieChartAnimationGrowthAll || _animationOptions & VBPieChartAnimationGrowthBackAll || _animationOptions & VBPieChartAnimationFan) {
             
-            for (int i = 0, len = [self.layer sublayers].count; i < len; i++) {
+            for (NSInteger i = 0, len = [self.layer sublayers].count; i < len; i++) {
                 VBPiePiece *piece = [[self.layer sublayers] objectAtIndex:i];
                 [piece _animate];
             }
             
         } else {
             
-            for (int i = 0, len = [self.layer sublayers].count; i < len; i++) {
+            for (NSInteger i = 0, len = [self.layer sublayers].count; i < len; i++) {
                 VBPiePiece *piece = [[self.layer sublayers] objectAtIndex:i];
                 if (i+1 < len) {
                     __block VBPiePiece *blockPiece = [[self.layer sublayers] objectAtIndex:i+1];
@@ -274,16 +284,15 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     }
 }
 
-
-- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation {
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation {
     [self setChartValues:chartValues animation:animation options:(VBPieChartAnimationFanAll | VBPieChartAnimationTimingLinear)];
 }
 
-- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options {
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options {
     [self setChartValues:chartValues animation:animation duration:0.7 options:options];
 }
 
-- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options {
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options {
     _presentWithAnimation = animation;
     _animationOptions = options;
     _animationDuration = duration;

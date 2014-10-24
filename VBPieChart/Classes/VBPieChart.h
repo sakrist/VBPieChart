@@ -25,7 +25,7 @@ typedef NS_OPTIONS(NSUInteger, VBPieChartAnimationOptions) {
 
 @interface VBPieChart : UIView
 
-@property (nonatomic, strong) NSDictionary *chartValues;
+@property (nonatomic, strong) NSArray *chartValues;
 
 @property (nonatomic, strong) UIColor *strokeColor;
 
@@ -34,6 +34,10 @@ typedef NS_OPTIONS(NSUInteger, VBPieChartAnimationOptions) {
 
 // Default is NO
 @property (nonatomic) BOOL enableInteractive;
+
+// Default is NO, under development
+@property (nonatomic) BOOL showLabels;
+
 
 // Hole in center of diagram, precent of radius
 // Default is 0.2, from 0 to 1
@@ -53,10 +57,10 @@ typedef NS_OPTIONS(NSUInteger, VBPieChartAnimationOptions) {
 // Start angle
 @property (nonatomic) float startAngle;
 
-- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation;
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation;
 
-- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options;
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options;
 
-- (void) setChartValues:(NSDictionary *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;
 
 @end
