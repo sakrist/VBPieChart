@@ -45,6 +45,7 @@
     self.label.fontSize = 10;
     self.label.alignmentMode = kCAAlignmentCenter;
     self.label.foregroundColor = [UIColor blackColor].CGColor;
+
     return self;
 }
 
@@ -237,7 +238,12 @@
                               delegate:self];
         [self __innerRadius:_outerRadius];
     }
+
+    // Create a transaction just to disable implicit animations
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
     [self setHidden:NO];
+    [CATransaction commit];
 }
 
 
