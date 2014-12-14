@@ -38,7 +38,7 @@ For:<br />
 
 --
 
-Version: 0.2.1<br>
+Version: 0.2.2<br>
 License: [MIT](http://opensource.org/licenses/MIT)
 
 --
