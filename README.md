@@ -37,16 +37,11 @@ For:<br />
     `- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`
 
 --
-
 Version: 0.2.2<br>
 License: [MIT](http://opensource.org/licenses/MIT)
-
 --
-
 Twitter: [@SAKrisT](https://twitter.com/SAKrisT)
-
 --
-
 Contribution or donating are welcome!
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B4VMLFZ986FNW">
 <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit"/>
