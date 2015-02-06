@@ -68,7 +68,7 @@
     [self pieceAngle:_angle start:_startAngle];
 }
 
-- (void) pieceAngle:(float)angle start:(float)startAngle; {
+- (void) pieceAngle:(float)angle start:(float)startAngle {
     _angle = angle;
     _endAngle = angle;
     _startAngle = startAngle;
