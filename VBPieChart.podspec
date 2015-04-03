@@ -16,13 +16,13 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "VBPieChart"
-  s.version      = "0.2.2"
+  s.version      = "0.3.0"
   s.summary      = "Pie Chart with different animations to present."
 
   s.description  = <<-DESC
                    Pie Chart iOS control with different animations to present.
                    Based on CAShapeLayer and CALayer, dependency to QuartzCore framework.
-                   Can be created in 4 lines of code.
+                   Can be created in few lines of code.
 
                    DESC
 
@@ -76,7 +76,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/sakrist/VBPieChart.git", :tag => "v0.2.2" }
+  s.source       = { :git => "https://github.com/sakrist/VBPieChart.git", :tag => "v0.3.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

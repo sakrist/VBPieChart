@@ -66,18 +66,37 @@
     
 
     [_chart setHoleRadiusPrecent:0.3];
-//    [_chart setShowLabels:YES];
+    
+    [_chart setLabelsPosition:VBLabelsPositionOnChart];
+    
     
     self.chartValues = @[
                          @{@"name":@"first", @"value":@50, @"color":[UIColor colorWithHex:0xdd191daa]},
-                         @{@"name":@"second", @"value":@20, @"color":[UIColor colorWithHex:0xd81b60aa]},
+                         @{@"name":@"sec", @"value":@20, @"color":[UIColor colorWithHex:0xd81b60aa]},
                          @{@"name":@"third", @"value":@40, @"color":[UIColor colorWithHex:0x8e24aaaa]},
-                         @{@"name":@"fourth 2", @"value":@70, @"color":[UIColor colorWithHex:0x3f51b5aa]},
-                         @{@"name":@"fourth 3", @"value":@65, @"color":[UIColor colorWithHex:0x5677fcaa]},
-                         @{@"name":@"fourth 4", @"value":@23, @"color":[UIColor colorWithHex:0x2baf2baa]},
-                         @{@"name":@"fourth 5", @"value":@34, @"color":[UIColor colorWithHex:0xb0bec5aa]},
-                         @{@"name":@"fourth 6", @"value":@54, @"color":[UIColor colorWithHex:0xf57c00aa]}
+                         @{@"name":@"fourth", @"value":@70, @"color":[UIColor colorWithHex:0x3f51b5aa]},
+                         @{@"name":@"some", @"value":@65, @"color":[UIColor colorWithHex:0x5677fcaa]},
+                         @{@"name":@"new", @"value":@23, @"color":[UIColor colorWithHex:0x2baf2baa]},
+                         @{@"name":@"label", @"value":@34, @"color":[UIColor colorWithHex:0xb0bec5aa]},
+                         @{@"name":@"here", @"value":@54, @"color":[UIColor colorWithHex:0xf57c00aa]}
                          ];
+    
+//    EXAMPLE for custom label position
+//
+//    [_chart setLabelsPosition:VBLabelsPositionCustom];
+//    [_chart setLabelBlock:^CGPoint( CALayer *layer) {
+//        NSInteger ind = [layer.superlayer.sublayers indexOfObject:layer]+2;
+//        return CGPointMake(sin(-ind/10.0*M_PI)*50+50, ind*30);
+//    }];
+//    
+//    self.chartValues = @[
+//                         @{@"name":@"37%", @"value":@65, @"color":[UIColor colorWithHex:0x5677fcaa], @"labelColor":[UIColor blackColor]},
+//                         @{@"name":@"13%", @"value":@23, @"color":[UIColor colorWithHex:0x2baf2baa], @"labelColor":[UIColor blackColor]},
+//                         @{@"name":@"19.3%", @"value":@34, @"color":[UIColor colorWithHex:0xb0bec5aa], @"labelColor":[UIColor blackColor]},
+//                         @{@"name":@"30.7%", @"value":@54, @"color":[UIColor colorWithHex:0xf57c00aa], @"labelColor":[UIColor blackColor]}
+//                         ];
+    
+    
     
     [_chart setChartValues:_chartValues animation:YES];
 

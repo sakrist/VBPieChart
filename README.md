@@ -37,7 +37,7 @@ For:<br />
     `- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`
 
 --
-Version: 0.2.2<br>
+Version: 0.3.0<br>
 License: [MIT](http://opensource.org/licenses/MIT)
 --
 Twitter: [@SAKrisT](https://twitter.com/SAKrisT)

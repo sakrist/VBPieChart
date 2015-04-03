@@ -23,9 +23,12 @@
 @property (nonatomic) VBPieChartAnimationOptions animationOptions;
 @property (nonatomic) float animationDuration;
 
-@property (nonatomic) BOOL showLabel;
+@property (nonatomic) VBLabelsPosition labelsPosition;
 
 @property (nonatomic, strong) CATextLayer *label;
+@property (nonatomic, strong) UIColor *labelColor;
+
+@property (nonatomic, copy)  VBLabelBlock labelBlock;
 
 @end
 
@@ -44,17 +47,27 @@
     self.label = [[CATextLayer alloc] init];
     self.label.fontSize = 10;
     self.label.alignmentMode = kCAAlignmentCenter;
-    self.label.foregroundColor = [UIColor blackColor].CGColor;
-
+    self.label.foregroundColor = [UIColor whiteColor].CGColor;
+    self.label.contentsScale = [UIScreen mainScreen].scale;
     return self;
 }
 
-- (void) setValue:(double)value {
-    _value = value;
-    if (value >= 0.04 && _showLabel) {
-        [self.label setString:[NSString stringWithFormat:@"%0.0f%%", self.value ]];
-    } else {
-        [self.label setHidden:YES];
+- (CGPoint) centroid {
+    CGFloat end_angle = _startAngle+_angle;
+    CGFloat r = (_innerRadius + _outerRadius) / 2;
+    CGFloat a = (_startAngle + end_angle) / 2;
+    return CGPointMake( cos(a) * r, sin(a) * r );
+}
+
+- (void)setLabelColor:(UIColor *)labelColor {
+    _labelColor = labelColor;
+    _label.foregroundColor = labelColor.CGColor;
+}
+
+- (void) setPieceName:(NSString *)pieceName {
+    _pieceName = pieceName;
+    if (_labelsPosition != VBLabelsPositionNone) {
+        [self.label setString:_pieceName];
     }
 }
 
@@ -106,8 +119,8 @@
     float y = center.y + _innerRadius*sin(calcAngle/2);
     
     _accentVector = CGPointMake(center.x-x, center.y-y);
-    _accentVector.x = fabsf(_accentVector.x)*mod_x /_innerRadius;
-    _accentVector.y = fabsf(_accentVector.y)*mod_y /_innerRadius;
+    _accentVector.x = fabs(_accentVector.x)*mod_x /_innerRadius;
+    _accentVector.y = fabs(_accentVector.y)*mod_y /_innerRadius;
 
     
     if (_accent) {
@@ -259,20 +272,50 @@
 - (void) setPath:(CGPathRef)path {
     [super setPath:path];
     
-    if (_showLabel) {
-        CGRect rect = CGPathGetPathBoundingBox(path);
+    if (_labelsPosition != VBLabelsPositionNone) {
         CGSize size = self.frame.size;
-        CGPoint center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        center = CGPointMake(center.x+_accentVector.x*size.width/4+_accentValue, center.y+_accentVector.y*size.height/4+_accentValue);
+        CGSize superSize = self.superlayer.frame.size;
+        CGPoint center = [self centroid];
+
+        VBLabelsPosition lp = _labelsPosition;
         
+        if (lp == VBLabelsPositionCustom) {
+            if (_labelBlock != nil) {
+                center = _labelBlock(self);
+            } else {
+                lp = VBLabelsPositionOnChart;
+            }
+        }
+        
+        if (lp == VBLabelsPositionOnChart) {
+            center.x += size.width/2;
+            center.y += size.height/2;
+        } else if (lp == VBLabelsPositionOutChart) {
+            CGFloat h = sqrt(center.x*center.x + center.y*center.y);
+            CGFloat labelr = MIN(superSize.width, superSize.height) / 2 + _label.frame.size.width/2;
+            center.x = superSize.width/2 + (center.x/h * labelr);
+            center.y = superSize.height/2 + (center.y/h * labelr);
+        }
+        // pythagorean theorem for hypotenuse
+    
+        
+        
+        CGSize labelSize = [_pieceName sizeWithFont:[UIFont systemFontOfSize:self.label.fontSize]];
+#warning "need to do something with it, sant be just magic number"
+        if (labelSize.width > 50) {
+            labelSize.width = 50;
+        }
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
-        if (CGRectContainsPoint(rect, center)) {
-            [self.label setPosition:center];
-            [self.label setHidden:NO];
-        } else {
-            [self.label setHidden:YES];
+        
+        
+        [self.label setFrame:CGRectMake(0, 0, labelSize.width, labelSize.height)];
+        
+        if (!_label.superlayer) {
+            [self.superlayer addSublayer:_label];
         }
+        [self.label setPosition:center];
+        [self.label setHidden:NO];
         [CATransaction commit];
     }
 }
@@ -314,8 +357,7 @@
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    [self.label setFrame:CGRectMake(0, 0, 20, 20)];
-    [self addSublayer:_label];
+    [self.label setFrame:CGRectMake(0, 0, 30, 14)];
 }
 
 - (BOOL) containsPoint:(CGPoint)point {

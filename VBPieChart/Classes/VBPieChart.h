@@ -20,8 +20,17 @@ typedef NS_OPTIONS(NSUInteger, VBPieChartAnimationOptions) {
     VBPieChartAnimationTimingEaseIn               = 2 << 16,
     VBPieChartAnimationTimingEaseOut              = 3 << 16,
     VBPieChartAnimationTimingLinear               = 4 << 16, // default
-    
 };
+    
+typedef NS_ENUM(NSUInteger, VBLabelsPosition) {
+    VBLabelsPositionNone        = 0, // default is no labels
+    VBLabelsPositionOnChart     = 1,
+    VBLabelsPositionOutChart    = 2,
+    VBLabelsPositionCustom      = 3,
+};
+    
+// returns center for label
+typedef CGPoint (^VBLabelBlock)(CALayer*layer);
 
 @interface VBPieChart : UIView
 
@@ -35,8 +44,11 @@ typedef NS_OPTIONS(NSUInteger, VBPieChartAnimationOptions) {
 // Default is NO
 @property (nonatomic) BOOL enableInteractive;
 
-// Default is NO, under development
-@property (nonatomic) BOOL showLabels;
+// Default VBLabelsPositionNone
+@property (nonatomic) VBLabelsPosition labelsPosition;
+
+// for VBLabelsPositionCustom
+@property (nonatomic, copy)  VBLabelBlock labelBlock;
 
 
 // Hole in center of diagram, precent of radius

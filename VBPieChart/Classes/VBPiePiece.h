@@ -14,8 +14,16 @@
 @property (nonatomic) float outerRadius;
 
 @property (nonatomic) double value;
+@property (nonatomic, strong) NSString *pieceName;
 
+/*
+ Actual angle of segment
+ */
 @property (nonatomic, readonly) float angle;
+
+/*
+ Start angle for segment
+ */
 @property (nonatomic, readonly) float startAngle;
 
 // Default is NO

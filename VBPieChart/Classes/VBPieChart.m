@@ -21,6 +21,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSNumber *value;
 @property (nonatomic, retain) UIColor *color;
+@property (nonatomic, retain) UIColor *labelColor;
 @property (nonatomic) BOOL accent;
 @end
 @implementation VBPiePieceData
@@ -45,7 +46,11 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 - (void) _animate;
 - (void) setAnimationOptions:(VBPieChartAnimationOptions)options;
 - (void) setAnimationDuration:(float)duration;
-- (void) setShowLabel:(BOOL)value;
+
+- (void) setLabelsPosition:(VBLabelsPosition)labelsPosition;
+- (void) setLabelBlock:(VBLabelBlock)labelBlock;
+- (void) setLabelColor:(UIColor *)labelColor;
+
 @property (nonatomic, copy) void (^endAnimationBlock)(void);
 @end
 
@@ -112,8 +117,8 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     [self updateCharts];
 }
 
-- (void) setShowLabels:(BOOL)showLabels {
-    _showLabels = showLabels;
+- (void) setLabelsPosition:(VBLabelsPosition)labelsPosition {
+    _labelsPosition = labelsPosition;
     [self updateCharts];
 }
 
@@ -195,6 +200,13 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
             } else {
                 data.color = [dict objectForKey:@"color"];
             }
+            
+            if (![dict objectForKey:@"labelColor"]) {
+                data.labelColor = [UIColor whiteColor];
+            } else {
+                data.labelColor = [dict objectForKey:@"labelColor"];
+            }
+            
             data.accent = [[dict objectForKey:@"accent"] boolValue];
         } else {
             data.value = (NSNumber*)object;
@@ -211,14 +223,14 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
         index++;
     }
     
-    double onePrecent = fullValue*0.01;
-    double onePrecentOfChart = _length*0.01;
-    double start = _startAngle;
+    CGFloat onePrecent = fullValue*0.01;
+    CGFloat onePrecentOfChart = _length*0.01;
+    CGFloat start = _startAngle;
 
     for (VBPiePieceData *data in _chartsData) {
         
-        double pieceValuePrecents = fabsf([data.value doubleValue])/onePrecent;
-        double pieceChartValue = onePrecentOfChart*pieceValuePrecents;
+        CGFloat pieceValuePrecents = fabs([data.value doubleValue])/onePrecent;
+        CGFloat pieceChartValue = onePrecentOfChart*pieceValuePrecents;
         
         if (pieceChartValue == 0) {
             continue;
@@ -230,8 +242,11 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
             [piece setAccentPrecent:0.1];
         }
         
-        [piece setShowLabel:_showLabels];
+        [piece setLabelsPosition:_labelsPosition];
+        [piece setLabelBlock:_labelBlock];
+        [piece setLabelColor:data.labelColor];
         [piece setValue:pieceValuePrecents];
+        [piece setPieceName:data.name];
         
         [piece setInnerRadius:_radius];
         [piece setOuterRadius:_holeRadius];
