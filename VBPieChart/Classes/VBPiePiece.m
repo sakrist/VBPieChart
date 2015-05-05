@@ -300,8 +300,9 @@
     
         
         
-        CGSize labelSize = [_pieceName sizeWithFont:[UIFont systemFontOfSize:self.label.fontSize]];
-#warning "need to do something with it, sant be just magic number"
+        CGSize labelSize = [_pieceName sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.label.fontSize]}];
+
+        // TODO: "need to do something with it, can't be just magic number"
         if (labelSize.width > 50) {
             labelSize.width = 50;
         }
