@@ -167,6 +167,9 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     if (!_chartValues) {
         return;
     }
+
+    // Reset data table
+    self.chartsData = [NSMutableArray array];
     
     // Clean old layers
     NSArray *arraySublayers = [NSArray arrayWithArray:self.layer.sublayers];
