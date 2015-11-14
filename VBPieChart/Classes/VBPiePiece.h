@@ -32,9 +32,11 @@
 // Default is 0.1 (i.e. 10%) of innerRadius
 @property (nonatomic) float accentPrecent;
 
-
+// Value in range 0..1
 - (BOOL) animateToAccent:(float)accentPrecent;
 
+
+// Values in radians
 - (void) pieceAngle:(float)angle start:(float)startAngle;
 
 
