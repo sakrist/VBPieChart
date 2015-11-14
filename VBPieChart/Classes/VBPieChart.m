@@ -41,6 +41,8 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 @property (nonatomic) VBPieChartAnimationOptions animationOptions;
 @property (nonatomic) float animationDuration;
 
+@property (nonatomic, strong) NSMutableArray *pieceArray;
+
 @end
 
 @interface VBPiePiece ()
@@ -200,7 +202,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
             continue;
         }
         
-        VBPiePiece *piece = (VBPiePiece *)self.layer.sublayers[data.index];
+        VBPiePiece *piece = (VBPiePiece *)_pieceArray[data.index];
         
         [piece _animateToAngle:pieceChartValue startAngle:start];
     
@@ -220,7 +222,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     for (CALayer *l in arraySublayers) {
         [l removeFromSuperlayer];
     }
-    arraySublayers = nil;
+    [_pieceArray removeAllObjects];
     
     // init temp variables
     CGRect rect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
@@ -235,9 +237,9 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
             data = [_chartsData objectAtIndex:index];
         } else {
             data = [[VBPiePieceData alloc] init];
-            data.index = index;
             created = YES;
         }
+        data.index = index;
         
         if ([object isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dict = (NSDictionary*)object;
@@ -275,6 +277,8 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     CGFloat onePrecentOfChart = _length*0.01;
     CGFloat start = _startAngle;
 
+    _pieceArray = [NSMutableArray array];
+    
     for (VBPiePieceData *data in _chartsData) {
         
         CGFloat pieceValuePrecents = fabs([data.value doubleValue])/onePrecent;
@@ -313,7 +317,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
         [piece setAnimationOptions:_animationOptions];
         
         [self.layer addSublayer:piece];
-        
+        [_pieceArray addObject:piece];
         start += pieceChartValue;
     }
     
@@ -322,25 +326,23 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
         
         if (_animationOptions & VBPieChartAnimationGrowthAll || _animationOptions & VBPieChartAnimationGrowthBackAll || _animationOptions & VBPieChartAnimationFan) {
             
-            NSArray *sublayers = [NSArray arrayWithArray:self.layer.sublayers];
-            for (VBPiePiece *piece in sublayers) {
+            for (VBPiePiece *piece in _pieceArray) {
                 [piece _animate];
             }
             
         } else {
             
-            NSArray *sublayers = [NSArray arrayWithArray:self.layer.sublayers];
-            for (NSInteger i = 0, len = sublayers.count; i < len; i++) {
-                VBPiePiece *piece = (VBPiePiece *)sublayers[i];
+            for (NSInteger i = 0, len = _pieceArray.count; i < len; i++) {
+                VBPiePiece *piece = (VBPiePiece *)_pieceArray[i];
                 if (i+1 < len) {
-                    __block VBPiePiece *blockPiece = (VBPiePiece *)sublayers[i+1];
+                    __block VBPiePiece *blockPiece = (VBPiePiece *)_pieceArray[i+1];
                     [piece setEndAnimationBlock:^{
                         [blockPiece _animate];
                     }];
                 }
             }
             
-            VBPiePiece *piece = (VBPiePiece *)self.layer.sublayers[0];
+            VBPiePiece *piece = (VBPiePiece *)_pieceArray[0];
             [piece _animate];
         }
         

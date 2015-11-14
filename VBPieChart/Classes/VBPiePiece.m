@@ -189,7 +189,7 @@
 
 - (void) drawInContext:(CGContextRef)ctx {
     
-    CAAnimationGroup *groupAnimation = [self animationForKey:@"groupAnimation"];
+    CAAnimationGroup *groupAnimation = (CAAnimationGroup *)[self animationForKey:@"groupAnimation"];
     if (groupAnimation) {
         _angle = _endAngle;
         VBPiePiece *p = groupAnimation.delegate;
@@ -279,9 +279,8 @@
 
 - (void) _animateToAngle:(float)angle startAngle:(float)startAngle {
     
-    
     CABasicAnimation *endAngleAnimation = [CABasicAnimation animationWithKeyPath:@"endAngle"];
-    [endAngleAnimation setFromValue:@(_endAngle)];
+    [endAngleAnimation setFromValue:@(_angle)];
     [endAngleAnimation setToValue:@(angle)];
     
     CABasicAnimation *startAngleAnimation = [CABasicAnimation animationWithKeyPath:@"startAngle"];
