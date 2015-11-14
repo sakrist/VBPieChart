@@ -4,7 +4,7 @@ VBPieChart
 Animated Pie Chart control for iOS apps, based on CALayer. Very easy in use and have custom labeling.
 
 
-<img src="https://github.com/sakrist/VBPieChart/blob/master/demonstration.gif">
+<img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%">
 
 
 Usage
