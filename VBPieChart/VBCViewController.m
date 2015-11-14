@@ -99,8 +99,13 @@
     
     
     [_chart setChartValues:_chartValues animation:YES];
-
+    
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+
+- (IBAction) changeSec:(id)sender {
+    [_chart setValue:@(100) forIndex:1];
 }
 
 

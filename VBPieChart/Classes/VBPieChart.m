@@ -18,6 +18,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 }
 
 @interface VBPiePieceData : NSObject
+@property (nonatomic) NSInteger index;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSNumber *value;
 @property (nonatomic, retain) UIColor *color;
@@ -43,6 +44,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 @end
 
 @interface VBPiePiece ()
+- (void) _animateToAngle:(float)angle startAngle:(float)startAngle;
 - (void) _animate;
 - (void) setAnimationOptions:(VBPieChartAnimationOptions)options;
 - (void) setAnimationDuration:(float)duration;
@@ -113,7 +115,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([keyPath isEqualToString:@"chartValues"] || [keyPath isEqualToString:@"enableStrokeColor"]) {
-        [self updateCharts];
+        [self _updateCharts];
     }
     if([keyPath isEqualToString:@"holeRadiusPrecent"] || [keyPath isEqualToString:@"radiusPrecent"]) {
         [self setFrame:self.frame];
@@ -125,12 +127,12 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     [super setFrame:frame];
     self.radius = frame.size.width/2*_radiusPrecent;
     self.holeRadius = _radius*_holeRadiusPrecent;
-    [self updateCharts];
+    [self _updateCharts];
 }
 
 - (void) setLabelsPosition:(VBLabelsPosition)labelsPosition {
     _labelsPosition = labelsPosition;
-    [self updateCharts];
+    [self _updateCharts];
 }
 
 
@@ -173,7 +175,41 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     }
 }
 
-- (void) updateCharts {
+
+- (void) setValue:(NSNumber*)value forIndex:(NSInteger)index {
+    VBPiePieceData *data = _chartsData[index];
+    data.value = value;
+    [self _refreshCharts];
+}
+
+- (void) _refreshCharts {
+    
+    double fullValue = 0;
+    for (VBPiePieceData *data in _chartsData) {
+        fullValue += fabsf([data.value floatValue]);
+    }
+    CGFloat onePrecent = fullValue*0.01;
+    CGFloat onePrecentOfChart = _length*0.01;
+    CGFloat start = _startAngle;
+    
+    for (VBPiePieceData *data in _chartsData) {
+        CGFloat pieceValuePrecents = fabs([data.value doubleValue])/onePrecent;
+        CGFloat pieceChartValue = onePrecentOfChart*pieceValuePrecents;
+        
+        if (pieceChartValue == 0) {
+            continue;
+        }
+        
+        VBPiePiece *piece = (VBPiePiece *)self.layer.sublayers[data.index];
+        
+        [piece _animateToAngle:pieceChartValue startAngle:start];
+    
+        start += pieceChartValue;
+    }
+}
+
+
+- (void) _updateCharts {
 
     if (!_chartValues) {
         return;
@@ -199,6 +235,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
             data = [_chartsData objectAtIndex:index];
         } else {
             data = [[VBPiePieceData alloc] init];
+            data.index = index;
             created = YES;
         }
         
@@ -285,24 +322,25 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
         
         if (_animationOptions & VBPieChartAnimationGrowthAll || _animationOptions & VBPieChartAnimationGrowthBackAll || _animationOptions & VBPieChartAnimationFan) {
             
-            for (NSInteger i = 0, len = [self.layer sublayers].count; i < len; i++) {
-                VBPiePiece *piece = [[self.layer sublayers] objectAtIndex:i];
+            NSArray *sublayers = [NSArray arrayWithArray:self.layer.sublayers];
+            for (VBPiePiece *piece in sublayers) {
                 [piece _animate];
             }
             
         } else {
             
-            for (NSInteger i = 0, len = [self.layer sublayers].count; i < len; i++) {
-                VBPiePiece *piece = [[self.layer sublayers] objectAtIndex:i];
+            NSArray *sublayers = [NSArray arrayWithArray:self.layer.sublayers];
+            for (NSInteger i = 0, len = sublayers.count; i < len; i++) {
+                VBPiePiece *piece = (VBPiePiece *)sublayers[i];
                 if (i+1 < len) {
-                    __block VBPiePiece *blockPiece = [[self.layer sublayers] objectAtIndex:i+1];
+                    __block VBPiePiece *blockPiece = (VBPiePiece *)sublayers[i+1];
                     [piece setEndAnimationBlock:^{
                         [blockPiece _animate];
                     }];
                 }
             }
             
-            VBPiePiece *piece = [[self.layer sublayers] objectAtIndex:0];
+            VBPiePiece *piece = (VBPiePiece *)self.layer.sublayers[0];
             [piece _animate];
         }
         

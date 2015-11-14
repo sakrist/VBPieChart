@@ -69,6 +69,8 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer);
 // Start angle
 @property (nonatomic) float startAngle;
 
+- (void) setValue:(NSNumber*)value forIndex:(NSInteger)index;
+
 - (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation;
 
 - (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options;

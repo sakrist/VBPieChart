@@ -176,7 +176,11 @@
 }
 
 + (BOOL) needsDisplayForKey:(NSString*)key {
-    if ([key isEqualToString:@"endAngle"] || [key isEqualToString:@"startAngle"] || [key isEqualToString:@"innerRadius"]|| [key isEqualToString:@"outerRadius"]) {
+    if ([key isEqualToString:@"endAngle"] ||
+        [key isEqualToString:@"startAngle"] ||
+        [key isEqualToString:@"innerRadius"] ||
+        [key isEqualToString:@"outerRadius"] ||
+        [key isEqualToString:@"groupAnimation"]) {
         return YES;
     } else {
         return [super needsDisplayForKey:key];
@@ -184,6 +188,14 @@
 }
 
 - (void) drawInContext:(CGContextRef)ctx {
+    
+    CAAnimationGroup *groupAnimation = [self animationForKey:@"groupAnimation"];
+    if (groupAnimation) {
+        _angle = _endAngle;
+        VBPiePiece *p = groupAnimation.delegate;
+        [p __startAngle:_startAngle];
+        [p __angle:_endAngle];
+    }
     
     CAAnimation *arcAnimation = [self animationForKey:@"endAngle"];
     if (arcAnimation) {
@@ -210,14 +222,20 @@
 - (void) animationDidStart:(CAAnimation *)anim { }
 
 - (void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    if ([((CABasicAnimation*)anim).keyPath isEqualToString:@"endAngle"]) {
+    
+    if ([anim isKindOfClass:[CAAnimationGroup class]]) {
         [self __angle:_endAngle];
-    }
-    if ([((CABasicAnimation*)anim).keyPath isEqualToString:@"innerRadius"] && flag) {
-        [self __innerRadius:temp_innerRadius];
-    }
-    if ([((CABasicAnimation*)anim).keyPath isEqualToString:@"outerRadius"] && flag) {
-        [self __outerRadius:temp_outerRadius];
+        return;
+    } else {
+        if ([((CABasicAnimation*)anim).keyPath isEqualToString:@"endAngle"]) {
+            [self __angle:_endAngle];
+        }
+        if ([((CABasicAnimation*)anim).keyPath isEqualToString:@"innerRadius"] && flag) {
+            [self __innerRadius:temp_innerRadius];
+        }
+        if ([((CABasicAnimation*)anim).keyPath isEqualToString:@"outerRadius"] && flag) {
+            [self __outerRadius:temp_outerRadius];
+        }
     }
     
     if (_endAnimationBlock != nil) {
@@ -257,6 +275,31 @@
     [CATransaction setDisableActions:YES];
     [self setHidden:NO];
     [CATransaction commit];
+}
+
+- (void) _animateToAngle:(float)angle startAngle:(float)startAngle {
+    
+    
+    CABasicAnimation *endAngleAnimation = [CABasicAnimation animationWithKeyPath:@"endAngle"];
+    [endAngleAnimation setFromValue:@(_endAngle)];
+    [endAngleAnimation setToValue:@(angle)];
+    
+    CABasicAnimation *startAngleAnimation = [CABasicAnimation animationWithKeyPath:@"startAngle"];
+    [startAngleAnimation setFromValue:@(_startAngle)];
+    [startAngleAnimation setToValue:@(startAngle)];
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.duration = 0.45;
+    group.repeatCount = 0;
+    group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    group.animations = @[endAngleAnimation, startAngleAnimation];
+    
+    [group setDelegate:self];
+    
+    
+    [self addAnimation:group forKey:@"groupAnimation"];
+    [self setValue:@(angle) forKey:@"endAngle"];
+    [self setValue:@(startAngle) forKey:@"startAngle"];
 }
 
 
@@ -367,6 +410,10 @@
 
 - (NSString *) description {
     return [NSString stringWithFormat:@"<VBPiePiece: %p, _startAngle=%f, _endAngle=%f>", self, _startAngle, _endAngle];
+}
+
+- (void) __startAngle:(float)startAngle {
+    _startAngle = startAngle;
 }
 
 - (void) __angle:(float)angle {
