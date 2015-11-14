@@ -61,6 +61,17 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 
 - (id) init {
     self = [super init];
+    [self configure];
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    [self configure];
+    return self;
+}
+
+- (void)configure {
     self.chartsData = [NSMutableArray array];
     self.strokeColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.7];
     
@@ -88,7 +99,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
            forKeyPath:@"radiusPrecent"
               options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
               context:nil];
-    return self;
+    
 }
 
 - (void) dealloc {
