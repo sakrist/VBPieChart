@@ -173,6 +173,8 @@
 		D21E0E1B1A8A501100366D57 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Volodymyr Boichentsov";
 				TargetAttributes = {
@@ -432,6 +434,7 @@
 				D21E0E441A8A501100366D57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D21E0E451A8A501100366D57 /* Build configuration list for PBXNativeTarget "VBPieChart_swiftTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +443,7 @@
 				D21E0E471A8A501100366D57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

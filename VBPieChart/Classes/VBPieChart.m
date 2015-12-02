@@ -177,6 +177,15 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     }
 }
 
+- (void) setValues:(NSDictionary*)values {
+
+    for (NSNumber *key in [values allKeys]) {
+        VBPiePieceData *data = _chartsData[[key intValue]];
+        data.value = values[key];
+    }
+
+    [self _refreshCharts];
+}
 
 - (void) setValue:(NSNumber*)value forIndex:(NSInteger)index {
     VBPiePieceData *data = _chartsData[index];
@@ -216,6 +225,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     if (!_chartValues) {
         return;
     }
+    self.chartsData = [NSMutableArray array];
     
     // Clean old layers
     NSArray *arraySublayers = [NSArray arrayWithArray:self.layer.sublayers];
@@ -284,10 +294,6 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
         CGFloat pieceValuePrecents = fabs([data.value doubleValue])/onePrecent;
         CGFloat pieceChartValue = onePrecentOfChart*pieceValuePrecents;
         
-        if (pieceChartValue == 0) {
-            continue;
-        }
-        
         VBPiePiece *piece = [[VBPiePiece alloc] init];
         [piece setFrame:rect];
         if (data.accent) {
@@ -355,7 +361,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 }
 
 - (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options {
-    [self setChartValues:chartValues animation:animation duration:0.7 options:options];
+    [self setChartValues:chartValues animation:animation duration:0.6 options:options];
 }
 
 - (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options {

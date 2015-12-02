@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController {
 
     let chart = VBPieChart();
-    var chartValues = NSArray();
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +21,8 @@ class ViewController: UIViewController {
         chart.enableStrokeColor = true;
         chart.holeRadiusPrecent = 0.3;
 
-        chart.layer.shadowOffset = CGSizeMake(2, 2);
-        chart.layer.shadowRadius = 3;
-        chart.layer.shadowColor = UIColor.blackColor().CGColor;
-        chart.layer.shadowOpacity = 0.7;
         
-        self.chartValues = [ ["name":"first", "value": 50, "color":UIColor(hexString:"dd191daa")],
+        let chartValues = [ ["name":"first", "value": 50, "color":UIColor(hexString:"dd191daa")],
         ["name":"second", "value": 20, "color":UIColor(hexString:"d81b60aa")],
         ["name":"third", "value": 40, "color":UIColor(hexString:"8e24aaaa")],
         ["name":"fourth 2", "value": 70, "color":UIColor(hexString:"3f51b5aa")],
@@ -37,7 +32,7 @@ class ViewController: UIViewController {
         ["name":"fourth 6", "value": 54, "color":UIColor(hexString:"f57c00aa")]
         ];
         
-        chart.setChartValues(self.chartValues, animation:true);
+        chart.setChartValues(chartValues as [AnyObject], animation:true);
         
         // Do any additional setup after loading the view, typically from a nib.
     }

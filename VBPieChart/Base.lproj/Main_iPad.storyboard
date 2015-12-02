@@ -125,6 +125,16 @@
                                     <action selector="changeSec:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZnC-2V-ldl"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6r-bo-H2e">
+                                <rect key="frame" x="175" y="625" width="123" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Progress example">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="progressExample:" destination="BYZ-38-t0r" eventType="touchUpInside" id="piI-RO-zFP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

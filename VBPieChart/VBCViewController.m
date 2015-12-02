@@ -17,9 +17,13 @@
 @property (nonatomic, retain) VBPieChart *chart;
 
 @property (nonatomic, retain) NSArray *chartValues;
+
+@property (nonatomic) double progress;
+
 @end
 
 @implementation VBCViewController
+
 - (IBAction)valueChangedSlider:(UISlider*)sender {
     
     float value = [sender value];
@@ -46,10 +50,8 @@
     
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self.view setNeedsLayout];
+- (void) chartInit {
+    _progress = 0;
     
     if (!_chart) {
         _chart = [[VBPieChart alloc] init];
@@ -64,7 +66,7 @@
     [_chart.layer setShadowColor:[UIColor blackColor].CGColor];
     [_chart.layer setShadowOpacity:0.7];
     
-
+    
     [_chart setHoleRadiusPrecent:0.3];
     
     [_chart setLabelsPosition:VBLabelsPositionOnChart];
@@ -80,6 +82,14 @@
                          @{@"name":@"label", @"value":@34, @"color":[UIColor colorWithHex:0xb0bec5aa]},
                          @{@"name":@"here", @"value":@54, @"color":[UIColor colorWithHex:0xf57c00aa]}
                          ];
+
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.view setNeedsLayout];
+    
+    [self chartInit];
     
 //    EXAMPLE for custom label position
 //
@@ -103,9 +113,42 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-
 - (IBAction) changeSec:(id)sender {
     [_chart setValue:@(100) forIndex:1];
+}
+
+- (IBAction) progressExample:(id)sender {
+    
+    _chart.strokeColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+    _chart.layer.borderWidth = 0;
+    [_chart setHoleRadiusPrecent:0.95];
+    
+    [_chart.layer setShadowOffset:CGSizeMake(0, 0)];
+    [_chart.layer setShadowRadius:0];
+    [_chart.layer setShadowColor:[UIColor whiteColor].CGColor];
+    [_chart.layer setShadowOpacity:0.0];
+    
+    self.chartValues = @[
+                         @{@"name":@"", @"value":@100, @"color":[UIColor colorWithHex:0xffffffff]},
+                         @{@"name":@"", @"value":@0, @"color":[UIColor colorWithHex:0xdd191daa]},];
+
+     [_chart setChartValues:_chartValues animation:NO];
+    [self progressAction];
+}
+
+- (void) progressAction {
+    _progress += 1;
+    
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.1];
+    [_chart setValues:@{@(0) : @(100-_progress),
+                        @(1) : @(_progress)}];
+    
+    [CATransaction commit];
+    
+    if (_progress < 100) {
+        [self performSelector:@selector(progressAction) withObject:nil afterDelay:0.1];
+    }
 }
 
 
@@ -121,7 +164,7 @@
 
 - (IBAction) growthBackAll:(id)sender {
     
-    [_chart setChartValues:_chartValues animation:YES options:VBPieChartAnimationGrowthBackAll | VBPieChartAnimationTimingEaseInOut];
+    [_chart setChartValues:_chartValues animation:YES duration:0.4 options:VBPieChartAnimationGrowthBackAll | VBPieChartAnimationTimingEaseInOut];
 }
 
 - (IBAction) growthBack:(id)sender {
@@ -132,7 +175,7 @@
 
 - (IBAction) fan:(id)sender {
     
-    [_chart setChartValues:_chartValues animation:YES duration:0.35 options:VBPieChartAnimationFan];
+    [_chart setChartValues:_chartValues animation:YES duration:0.4 options:VBPieChartAnimationFan];
 }
 
 

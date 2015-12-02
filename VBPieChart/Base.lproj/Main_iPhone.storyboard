@@ -88,13 +88,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jD7-Ul-KGx">
-                                <rect key="frame" x="93" y="518" width="116" height="30"/>
+                                <rect key="frame" x="20" y="518" width="116" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Set 100 for &quot;sec&quot;">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="changeSec:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="swD-uY-q3i"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NO6-HH-cLE">
+                                <rect key="frame" x="177" y="518" width="123" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Progress example">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="progressExample:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n8Q-UC-bPO"/>
                                 </connections>
                             </button>
                         </subviews>

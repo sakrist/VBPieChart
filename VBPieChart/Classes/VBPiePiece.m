@@ -279,26 +279,30 @@
 
 - (void) _animateToAngle:(float)angle startAngle:(float)startAngle {
     
-    CABasicAnimation *endAngleAnimation = [CABasicAnimation animationWithKeyPath:@"endAngle"];
-    [endAngleAnimation setFromValue:@(_angle)];
-    [endAngleAnimation setToValue:@(angle)];
+    if (![CATransaction disableActions]) {
+        CABasicAnimation *endAngleAnimation = [CABasicAnimation animationWithKeyPath:@"endAngle"];
+        [endAngleAnimation setFromValue:@(_angle)];
+        [endAngleAnimation setToValue:@(angle)];
+        
+        CABasicAnimation *startAngleAnimation = [CABasicAnimation animationWithKeyPath:@"startAngle"];
+        [startAngleAnimation setFromValue:@(_startAngle)];
+        [startAngleAnimation setToValue:@(startAngle)];
+        
+        CAAnimationGroup *group = [CAAnimationGroup animation];
+        group.duration = [CATransaction animationDuration];
+        group.repeatCount = 0;
+        group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        group.animations = @[endAngleAnimation, startAngleAnimation];
+        
+        [group setDelegate:self];
     
-    CABasicAnimation *startAngleAnimation = [CABasicAnimation animationWithKeyPath:@"startAngle"];
-    [startAngleAnimation setFromValue:@(_startAngle)];
-    [startAngleAnimation setToValue:@(startAngle)];
-    
-    CAAnimationGroup *group = [CAAnimationGroup animation];
-    group.duration = 0.45;
-    group.repeatCount = 0;
-    group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    group.animations = @[endAngleAnimation, startAngleAnimation];
-    
-    [group setDelegate:self];
-    
-    
-    [self addAnimation:group forKey:@"groupAnimation"];
-    [self setValue:@(angle) forKey:@"endAngle"];
-    [self setValue:@(startAngle) forKey:@"startAngle"];
+        [self addAnimation:group forKey:@"groupAnimation"];
+        [self setValue:@(angle) forKey:@"endAngle"];
+        [self setValue:@(startAngle) forKey:@"startAngle"];
+    } else {
+        [self __startAngle:startAngle];
+        [self __angle:angle];
+    }
 }
 
 
@@ -387,7 +391,7 @@
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"path"];
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 	animation.repeatCount = 0;
-    animation.duration = 0.3;
+    animation.duration = [CATransaction animationDuration];
 	animation.fromValue = (__bridge id)self.path;
 	animation.toValue = (__bridge id)path;
     [self addAnimation:animation forKey:@"animatePath"];
