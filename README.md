@@ -2,11 +2,7 @@
 
 #VBPieChart
 
-
 Animated Pie Chart control for iOS apps, based on CALayer. Very easy in use and have custom labeling.
-
-<img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%">
-
 
 ##Usage
 
@@ -54,7 +50,7 @@ Optional:
 
 ## Documentation
 
-VBPieChart is subclass of UIView
+`VBPieChart` is subclass of `UIView`
 
 ####Properties
 
@@ -74,7 +70,10 @@ Defines the **radius**,  **full radius** = frame.size.width/2, actual **radius**
 Block will help to redefine positions for labels.
 
 ####Methods
-`- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`<br />
+
+```objc
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;
+```
 Setup data to pie chart with animation or not, animation options and duration.
 
 Animation options:
@@ -91,12 +90,27 @@ Animation options:
 * `VBPieChartAnimationTimingLinear`
 
 
-`- (void) setValue:(NSNumber*)value forIndex:(NSInteger)index;`<br />
-Change value for elemet at index. Value will change with animation.
+```objc
+- (void) setValue:(NSNumber*)value forIndex:(NSInteger)index;
+```
+Change value for elemet at index. Value will be changed with animation. <br />
+
+```objc
+- (void) setValues:(NSDictionary*)values;
+```
+Change values in multiple sections. Values will be changed with animation. <br />
+Example:
+```objc
+[chartView setValues:@{@(0) : @(50), @(1) : @(70)}]; // set 50 for first and 70 for second sections
+```
+
+## Screenshots
+<img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%">
 
 ----
 
 <br>
 Version: 0.3.2<br>
 License: [MIT](http://opensource.org/licenses/MIT)
+
 
