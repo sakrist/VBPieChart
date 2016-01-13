@@ -71,9 +71,7 @@ Block will help to redefine positions for labels.
 
 ####Methods
 
-```objc
-- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;
-```
+`- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`
 Setup data to pie chart with animation or not, animation options and duration.
 
 Animation options:
@@ -90,19 +88,13 @@ Animation options:
 * `VBPieChartAnimationTimingLinear`
 
 
-```objc
-- (void) setValue:(NSNumber*)value forIndex:(NSInteger)index;
-```
+`- (void) setValue:(NSNumber*)value forIndex:(NSInteger)index;` <br />
 Change value for elemet at index. Value will be changed with animation. <br />
 
-```objc
-- (void) setValues:(NSDictionary*)values;
-```
+`- (void) setValues:(NSDictionary*)values;` <br />
 Change values in multiple sections. Values will be changed with animation. <br />
 Example:
-```objc
-[chartView setValues:@{@(0) : @(50), @(1) : @(70)}]; // set 50 for first and 70 for second sections
-```
+`[chartView setValues:@{@(0) : @(50), @(1) : @(70)}]; // set 50 for first and 70 for second sections`
 
 ## Screenshots
 <img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%">
