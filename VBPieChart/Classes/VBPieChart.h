@@ -30,19 +30,9 @@ typedef NS_ENUM(NSUInteger, VBLabelsPosition) {
 };
     
 // returns center for label
-typedef CGPoint (^VBLabelBlock)(CALayer*layer);
+typedef CGPoint (^VBLabelBlock)(CALayer*layer, NSInteger index);
 
 @interface VBPieChart : UIView
-
-@property (nonatomic, strong) NSArray *chartValues;
-
-@property (nonatomic, strong) UIColor *strokeColor;
-
-// Default is NO
-@property (nonatomic) BOOL enableStrokeColor;
-
-// Default is NO
-@property (nonatomic) BOOL enableInteractive;
 
 // Default VBLabelsPositionNone
 @property (nonatomic) VBLabelsPosition labelsPosition;
@@ -66,14 +56,22 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer);
 // Default M_PI*2.
 @property (nonatomic) float length;
 
-// Start angle
+// Start angle, from 0 to M_PI*2
+// Default 0.
 @property (nonatomic) float startAngle;
 
 // applies with animation
 - (void) setValues:(NSDictionary*)values;
 
 // applies with animation
-- (void) setValue:(NSNumber*)value forIndex:(NSInteger)index;
+- (void) setValue:(NSNumber*)value pieceAtIndex:(NSInteger)index;
+
+// remove piece at index
+- (void) removePieceAtIndex:(NSInteger)index;
+
+
+
+- (void) setChartValues:(NSArray *)chartValues;
 
 - (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation;
 
@@ -82,3 +80,11 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer);
 - (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;
 
 @end
+
+
+@interface VBPieChart (_deprecated)
+@property (nonatomic) BOOL enableInteractive DEPRECATED_ATTRIBUTE;
+@property (nonatomic, strong) UIColor *strokeColor DEPRECATED_MSG_ATTRIBUTE("Use strokeColor parameter for value");
+@property (nonatomic) BOOL enableStrokeColor DEPRECATED_MSG_ATTRIBUTE("Use strokeColor parameter for value");
+@end
+

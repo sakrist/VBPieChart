@@ -47,6 +47,7 @@
 		D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VBPiePiece.m; path = Classes/VBPiePiece.m; sourceTree = "<group>"; };
 		D2C0FBB118B02C2400C51D08 /* VBPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VBPieChart.h; path = Classes/VBPieChart.h; sourceTree = "<group>"; };
 		D2C0FBB218B02C2400C51D08 /* VBPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VBPieChart.m; path = Classes/VBPieChart.m; sourceTree = "<group>"; };
+		D2D6AD381C4BC97D00125D9E /* VBPiePiece_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VBPiePiece_private.h; path = Classes/VBPiePiece_private.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +107,7 @@
 				D2C0FBB218B02C2400C51D08 /* VBPieChart.m */,
 				D2C0FBAE18B02C0900C51D08 /* VBPiePiece.h */,
 				D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */,
+				D2D6AD381C4BC97D00125D9E /* VBPiePiece_private.h */,
 				D2C0FBAB18B022DA00C51D08 /* UIColor+HexColor.h */,
 				D2C0FBAC18B022DA00C51D08 /* UIColor+HexColor.m */,
 				D2C0FB8218B01CBA00C51D08 /* Images.xcassets */,

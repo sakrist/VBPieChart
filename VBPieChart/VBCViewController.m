@@ -30,8 +30,7 @@
     
     switch (sender.tag) {
         case 0: {
-//            [_chart setFrame:CGRectMake(100, 100, value, value)];
-            NSMutableArray *array = [NSMutableArray arrayWithArray:_chart.chartValues];
+            NSMutableArray *array = [NSMutableArray arrayWithArray:_chartValues];
             
             NSMutableDictionary *object = [NSMutableDictionary dictionaryWithDictionary:[array objectAtIndex:sender.tag]];
             [object setObject:[NSNumber numberWithFloat:sender.value] forKey:@"value"];
@@ -58,14 +57,13 @@
         [self.view addSubview:_chart];
     }
     [_chart setFrame:CGRectMake(10, 50, 300, 300)];
-    [_chart setEnableStrokeColor:YES];
     [_chart setHoleRadiusPrecent:0.3];
     
     [_chart.layer setShadowOffset:CGSizeMake(2, 2)];
     [_chart.layer setShadowRadius:3];
     [_chart.layer setShadowColor:[UIColor blackColor].CGColor];
     [_chart.layer setShadowOpacity:0.7];
-    
+    _chart.startAngle = M_PI+M_PI_2;
     
     [_chart setHoleRadiusPrecent:0.3];
     
@@ -77,10 +75,10 @@
                          @{@"name":@"sec", @"value":@20, @"color":[UIColor colorWithHex:0xd81b60aa]},
                          @{@"name":@"third", @"value":@40, @"color":[UIColor colorWithHex:0x8e24aaaa]},
                          @{@"name":@"fourth", @"value":@70, @"color":[UIColor colorWithHex:0x3f51b5aa]},
-                         @{@"name":@"some", @"value":@65, @"color":[UIColor colorWithHex:0x5677fcaa]},
-                         @{@"name":@"new", @"value":@23, @"color":[UIColor colorWithHex:0x2baf2baa]},
-                         @{@"name":@"label", @"value":@34, @"color":[UIColor colorWithHex:0xb0bec5aa]},
-                         @{@"name":@"here", @"value":@54, @"color":[UIColor colorWithHex:0xf57c00aa]}
+                         @{@"value":@65, @"color":[UIColor colorWithHex:0x5677fcaa]},
+                         @{@"value":@23, @"color":[UIColor colorWithHex:0x2baf2baa]},
+                         @{@"value":@34, @"color":[UIColor colorWithHex:0xb0bec5aa]},
+                         @{@"name":@"stroke", @"value":@54, @"color":[UIColor colorWithHex:0xf57c00aa], @"strokeColor":[UIColor whiteColor]}
                          ];
 
 }
@@ -94,9 +92,9 @@
 //    EXAMPLE for custom label position
 //
 //    [_chart setLabelsPosition:VBLabelsPositionCustom];
-//    [_chart setLabelBlock:^CGPoint( CALayer *layer) {
-//        NSInteger ind = [layer.superlayer.sublayers indexOfObject:layer]+2;
-//        return CGPointMake(sin(-ind/10.0*M_PI)*50+50, ind*30);
+//    [_chart setLabelBlock:^CGPoint( CALayer *layer, NSInteger index) {
+//        CGPoint p = CGPointMake(sin(-index/10.0*M_PI)*50+50, index*30);
+//        return p;
 //    }];
 //    
 //    self.chartValues = @[
@@ -114,12 +112,15 @@
 }
 
 - (IBAction) changeSec:(id)sender {
-    [_chart setValue:@(100) forIndex:1];
+    [_chart setValue:@(100) pieceAtIndex:1];
+}
+
+- (IBAction) removeSecond:(id)sender {
+    [_chart removePieceAtIndex:1];
 }
 
 - (IBAction) progressExample:(id)sender {
     
-    _chart.strokeColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     _chart.layer.borderWidth = 0;
     [_chart setHoleRadiusPrecent:0.95];
     
@@ -127,7 +128,7 @@
     [_chart.layer setShadowRadius:0];
     [_chart.layer setShadowColor:[UIColor whiteColor].CGColor];
     [_chart.layer setShadowOpacity:0.0];
-    
+
     self.chartValues = @[
                          @{@"name":@"", @"value":@100, @"color":[UIColor colorWithHex:0xffffffff]},
                          @{@"name":@"", @"value":@0, @"color":[UIColor colorWithHex:0xdd191daa]},];
@@ -137,17 +138,20 @@
 }
 
 - (void) progressAction {
-    _progress += 1;
+    _progress += 0.25;
     
-    [CATransaction begin];
-    [CATransaction setAnimationDuration:0.1];
+    [CATransaction setAnimationDuration:0.0167];
+    if (_progress < 100) {
+        [CATransaction setCompletionBlock:^{
+            [self progressAction];
+        }];
+    }
+
     [_chart setValues:@{@(0) : @(100-_progress),
                         @(1) : @(_progress)}];
     
-    [CATransaction commit];
-    
-    if (_progress < 100) {
-        [self performSelector:@selector(progressAction) withObject:nil afterDelay:0.1];
+    if (_progress == 100) {
+        _progress = 0;
     }
 }
 
@@ -193,7 +197,7 @@
         _chart.startAngle = M_PI;
     }
     
-    [_chart setChartValues:_chart.chartValues animation:YES];
+    [_chart setChartValues:_chartValues animation:YES];
     
 }
 

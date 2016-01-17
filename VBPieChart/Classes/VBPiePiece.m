@@ -7,11 +7,15 @@
 //
 
 #import "VBPiePiece.h"
+#import "VBPiePiece_private.h"
 #import "VBPieChart.h"
+
+@implementation VBPiePieceData
+@end
+
 
 @interface VBPiePiece ()
 
-@property (nonatomic) CGPoint accentVector;
 @property (nonatomic) float accentValue;
 
 @property (nonatomic) float endAngle;
@@ -28,7 +32,9 @@
 @property (nonatomic, strong) CATextLayer *label;
 @property (nonatomic, strong) UIColor *labelColor;
 
-@property (nonatomic, copy)  VBLabelBlock labelBlock;
+@property (nonatomic, copy) VBLabelBlock labelBlock;
+
+@property (nonatomic, weak) VBPiePieceData* pieceData;
 
 @end
 
@@ -50,6 +56,23 @@
     self.label.foregroundColor = [UIColor whiteColor].CGColor;
     self.label.contentsScale = [UIScreen mainScreen].scale;
     return self;
+}
+
+- (void) setData:(VBPiePieceData*)data {
+    
+    _pieceData = data;
+    
+    if (data.accent) {
+        [self setAccentPrecent:0.1];
+    }
+    [self setLabelColor:data.labelColor];
+    [self setPieceName:data.name];
+    if (data.color) {
+        self.fillColor = data.color.CGColor;
+    }
+    if (data.strokeColor) {
+        self.strokeColor = data.strokeColor.CGColor;
+    }
 }
 
 - (CGPoint) centroid {
@@ -100,28 +123,19 @@
     
     // calculate vector of moving
     
-    float calcAngle = angle+startAngle*2;
-    int mod_x = 1;
-    int mod_y = 1;
+    float calcAngle = startAngle+angle/2;
     
-    if (calcAngle/2 > M_PI+M_PI_2) {
-        mod_x = 1;
-        mod_y = -1;
-    } else if (calcAngle/2 > M_PI) {
-        mod_x = -1;
-        mod_y = -1;
-    } else if (calcAngle/2 > M_PI_2) {
-        mod_x = -1;
-        mod_y = 1;
-    }
+    float x = center.x + _innerRadius*cos(calcAngle);
+    float y = center.y + _innerRadius*sin(calcAngle);
+    float x_outer = center.x + _outerRadius*cos(calcAngle);
+    float y_outer = center.y + _outerRadius*sin(calcAngle);
     
-    float x = center.x + _innerRadius*cos(calcAngle/2);
-    float y = center.y + _innerRadius*sin(calcAngle/2);
+    CGPoint v = CGPointMake((x-x_outer), (y-y_outer));
+    float length = sqrt(v.x * v.x + v.y * v.y);
+    v.x /= length;
+    v.y /= length;
+    _accentVector = v;
     
-    _accentVector = CGPointMake(center.x-x, center.y-y);
-    _accentVector.x = fabs(_accentVector.x)*mod_x /_innerRadius;
-    _accentVector.y = fabs(_accentVector.y)*mod_y /_innerRadius;
-
     
     if (_accent) {
         CGAffineTransform matrix = CGAffineTransformIdentity;
@@ -132,7 +146,7 @@
         
 #if DEBUG
 //        CALayer *layer = [CALayer layer];
-//        [layer setFrame:CGRectMake(center.x+_accentVector.x*size.width/2, center.y+_accentVector.y*size.height/2, 2, 2)];
+//        [layer setFrame:CGRectMake(x, y, 2, 2)];
 //        layer.backgroundColor = [UIColor redColor].CGColor;
 //        [self addSublayer:layer];
 #endif
@@ -293,7 +307,7 @@
         group.repeatCount = 0;
         group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         group.animations = @[endAngleAnimation, startAngleAnimation];
-        
+
         [group setDelegate:self];
     
         [self addAnimation:group forKey:@"groupAnimation"];
@@ -325,26 +339,32 @@
 
         VBLabelsPosition lp = _labelsPosition;
         
-        if (lp == VBLabelsPositionCustom) {
-            if (_labelBlock != nil) {
-                center = _labelBlock(self);
-            } else {
-                lp = VBLabelsPositionOnChart;
+        
+        
+        switch (lp) {
+            case VBLabelsPositionCustom:
+            case VBLabelsPositionOnChart:
+                if (_labelBlock != nil) {
+                    center = _labelBlock(self, _pieceData.index);
+                    break;
+                }
+                center.x += size.width/2;
+                center.y += size.height/2;
+                break;
+                
+            case VBLabelsPositionOutChart:
+            {
+                CGFloat h = sqrt(center.x*center.x + center.y*center.y);
+                CGFloat labelr = MIN(superSize.width, superSize.height) / 2 + _label.frame.size.width/2;
+                center.x = superSize.width/2 + (center.x/h * labelr);
+                center.y = superSize.height/2 + (center.y/h * labelr);
             }
+                break;
+            case VBLabelsPositionNone:
+                break;
         }
         
-        if (lp == VBLabelsPositionOnChart) {
-            center.x += size.width/2;
-            center.y += size.height/2;
-        } else if (lp == VBLabelsPositionOutChart) {
-            CGFloat h = sqrt(center.x*center.x + center.y*center.y);
-            CGFloat labelr = MIN(superSize.width, superSize.height) / 2 + _label.frame.size.width/2;
-            center.x = superSize.width/2 + (center.x/h * labelr);
-            center.y = superSize.height/2 + (center.y/h * labelr);
-        }
         // pythagorean theorem for hypotenuse
-    
-        
         
         CGSize labelSize = [_pieceName sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.label.fontSize]}];
 
@@ -394,6 +414,7 @@
     animation.duration = [CATransaction animationDuration];
 	animation.fromValue = (__bridge id)self.path;
 	animation.toValue = (__bridge id)path;
+    animation.delegate = self;
     [self addAnimation:animation forKey:@"animatePath"];
     
     self.path = path;
@@ -438,6 +459,14 @@
     CGPathRef path = [self refreshPath];
     self.path = path;
     CGPathRelease(path);
+}
+
+- (void) removeLable {
+    if (self.label) {
+        [self.label setHidden:YES];
+        [self.label removeFromSuperlayer];
+        self.label = nil;
+    }
 }
 
 @end

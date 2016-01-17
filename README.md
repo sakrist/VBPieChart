@@ -40,6 +40,7 @@ Optional:
 - `color`
 - `labelColor`
 - `accent`
+- `strokeColor`
 
 #####Present pie charts with animation:
 
@@ -71,6 +72,9 @@ Block will help to redefine positions for labels.
 
 ####Methods
 
+Simple setup data.<br />
+`- (void) setChartValues:(NSArray *)chartValues;`<br />
+
 Setup data to pie chart with animation or not, animation options and duration.<br />
 `- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;`
 
@@ -88,7 +92,10 @@ Animation options:
 * `VBPieChartAnimationTimingLinear`
 
 Change value for elemet at index. Value will be changed with animation. <br />
-`- (void) setValue:(NSNumber*)value forIndex:(NSInteger)index;` <br />
+`- (void) setValue:(NSNumber*)value pieceAtIndex:(NSInteger)index;` <br />
+
+Remove piece at index.<br />
+`- (void) removePieceAtIndex:(NSInteger)index;`<br />
 
 Change values in multiple sections. Values will be changed with animation. <br />
 `- (void) setValues:(NSDictionary*)values;` <br />
@@ -101,7 +108,7 @@ Example: <br />
 ----
 
 <br>
-Version: 0.3.2<br>
+Version: 0.4.0<br>
 License: [MIT](http://opensource.org/licenses/MIT)
 
 
