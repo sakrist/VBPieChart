@@ -1,5 +1,6 @@
-<img src="https://travis-ci.org/sakrist/VBPieChart.svg?branch=master"><br \>
-
+![](https://travis-ci.org/sakrist/VBPieChart.svg?branch=master)
+![](https://img.shields.io/cocoapods/v/VBPieChart.svg?style=flat)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)<br \>
 #VBPieChart
 
 Animated Pie Chart control for iOS apps, based on CALayer. Very easy in use and have custom labeling.
@@ -104,11 +105,3 @@ Example: <br />
 
 ## Screenshots
 <img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%">
-
-----
-
-<br>
-Version: 0.4.0<br>
-License: [MIT](http://opensource.org/licenses/MIT)
-
-
