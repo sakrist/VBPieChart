@@ -1,5 +1,5 @@
-![](https://travis-ci.org/sakrist/VBPieChart.svg?branch=master)
-![](https://img.shields.io/cocoapods/v/VBPieChart.svg?style=flat)
+[![](https://travis-ci.org/sakrist/VBPieChart.svg?branch=master)](https://travis-ci.org/sakrist/VBPieChart)
+[![](https://img.shields.io/cocoapods/v/VBPieChart.svg?style=flat)](https://cocoapods.org/pods/VBPieChart)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)<br \>
 #VBPieChart
 
