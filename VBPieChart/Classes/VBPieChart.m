@@ -178,7 +178,8 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     VBPiePieceData *data = _chartsData[index];
     data.value = @(0);
     [self _refreshCharts];
-    [CATransaction setCompletionBlock:^{
+    
+    void (^completionBlock)(void)  = ^(void){
         [_chartsData removeObjectAtIndex:index];
         [piece removeFromSuperlayer];
         [_pieceArray removeObjectAtIndex:index];
@@ -187,7 +188,13 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
             VBPiePieceData *data = _chartsData[i];
             data.index = i;
         }
-    }];
+    };
+    
+    if ([CATransaction disableActions]) {
+        completionBlock();
+    } else {
+        [CATransaction setCompletionBlock:completionBlock];
+    }
 }
 
 
@@ -350,7 +357,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
                 }
             }
             
-            VBPiePiece *piece = (VBPiePiece *)_pieceArray[0];
+            VBPiePiece *piece = (VBPiePiece *)_pieceArray.firstObject;
             [piece _animate];
         }
         

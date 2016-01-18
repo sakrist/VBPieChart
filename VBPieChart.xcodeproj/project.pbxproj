@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2271CC01C4D85CE00AF8B8B /* VBCSimpleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2271CBF1C4D85CE00AF8B8B /* VBCSimpleTests.m */; };
 		D2C0FB6818B01CBA00C51D08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6718B01CBA00C51D08 /* Foundation.framework */; };
 		D2C0FB6A18B01CBA00C51D08 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6918B01CBA00C51D08 /* CoreGraphics.framework */; };
 		D2C0FB6C18B01CBA00C51D08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6B18B01CBA00C51D08 /* UIKit.framework */; };
@@ -23,7 +24,20 @@
 		D2C0FBB318B02C2400C51D08 /* VBPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FBB218B02C2400C51D08 /* VBPieChart.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D2271CBA1C4D85A400AF8B8B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2C0FB5C18B01CBA00C51D08 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2C0FB6318B01CBA00C51D08;
+			remoteInfo = VBPieChart;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		D2271CB51C4D85A400AF8B8B /* VBPieChartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VBPieChartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2271CB91C4D85A400AF8B8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2271CBF1C4D85CE00AF8B8B /* VBCSimpleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCSimpleTests.m; sourceTree = "<group>"; };
 		D2C0FB6418B01CBA00C51D08 /* VBPieChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VBPieChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C0FB6718B01CBA00C51D08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2C0FB6918B01CBA00C51D08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,6 +65,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D2271CB21C4D85A400AF8B8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2C0FB6118B01CBA00C51D08 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,10 +86,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D2271CB61C4D85A400AF8B8B /* VBPieChartTests */ = {
+			isa = PBXGroup;
+			children = (
+				D2271CBF1C4D85CE00AF8B8B /* VBCSimpleTests.m */,
+				D2271CB91C4D85A400AF8B8B /* Info.plist */,
+			);
+			path = VBPieChartTests;
+			sourceTree = "<group>";
+		};
 		D2C0FB5B18B01CBA00C51D08 = {
 			isa = PBXGroup;
 			children = (
 				D2C0FB6D18B01CBA00C51D08 /* VBPieChart */,
+				D2271CB61C4D85A400AF8B8B /* VBPieChartTests */,
 				D2C0FB6618B01CBA00C51D08 /* Frameworks */,
 				D2C0FB6518B01CBA00C51D08 /* Products */,
 			);
@@ -78,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				D2C0FB6418B01CBA00C51D08 /* VBPieChart.app */,
+				D2271CB51C4D85A400AF8B8B /* VBPieChartTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +162,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D2271CB41C4D85A400AF8B8B /* VBPieChartTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2271CBE1C4D85A400AF8B8B /* Build configuration list for PBXNativeTarget "VBPieChartTests" */;
+			buildPhases = (
+				D2271CB11C4D85A400AF8B8B /* Sources */,
+				D2271CB21C4D85A400AF8B8B /* Frameworks */,
+				D2271CB31C4D85A400AF8B8B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2271CBB1C4D85A400AF8B8B /* PBXTargetDependency */,
+			);
+			name = VBPieChartTests;
+			productName = VBPieChartTests;
+			productReference = D2271CB51C4D85A400AF8B8B /* VBPieChartTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D2C0FB6318B01CBA00C51D08 /* VBPieChart */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2C0FB9918B01CBA00C51D08 /* Build configuration list for PBXNativeTarget "VBPieChart" */;
@@ -157,6 +207,10 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = SAKrisT;
 				TargetAttributes = {
+					D2271CB41C4D85A400AF8B8B = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = D2C0FB6318B01CBA00C51D08;
+					};
 					D2C0FB6318B01CBA00C51D08 = {
 						DevelopmentTeam = DHKZ7WR43P;
 					};
@@ -176,11 +230,19 @@
 			projectRoot = "";
 			targets = (
 				D2C0FB6318B01CBA00C51D08 /* VBPieChart */,
+				D2271CB41C4D85A400AF8B8B /* VBPieChartTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D2271CB31C4D85A400AF8B8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2C0FB6218B01CBA00C51D08 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -195,6 +257,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D2271CB11C4D85A400AF8B8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2271CC01C4D85CE00AF8B8B /* VBCSimpleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2C0FB6018B01CBA00C51D08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +279,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D2271CBB1C4D85A400AF8B8B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2C0FB6318B01CBA00C51D08 /* VBPieChart */;
+			targetProxy = D2271CBA1C4D85A400AF8B8B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D2C0FB7018B01CBA00C51D08 /* InfoPlist.strings */ = {
@@ -238,6 +316,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D2271CBC1C4D85A400AF8B8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = VBPieChartTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sakrist.VBPieChartTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VBPieChart.app/VBPieChart";
+			};
+			name = Debug;
+		};
+		D2271CBD1C4D85A400AF8B8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = VBPieChartTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sakrist.VBPieChartTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VBPieChart.app/VBPieChart";
+			};
+			name = Release;
+		};
 		D2C0FB9718B01CBA00C51D08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -347,6 +465,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D2271CBE1C4D85A400AF8B8B /* Build configuration list for PBXNativeTarget "VBPieChartTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2271CBC1C4D85A400AF8B8B /* Debug */,
+				D2271CBD1C4D85A400AF8B8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D2C0FB5F18B01CBA00C51D08 /* Build configuration list for PBXProject "VBPieChart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
