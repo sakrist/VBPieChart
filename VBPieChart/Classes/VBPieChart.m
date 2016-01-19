@@ -21,8 +21,8 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 
 @interface VBPieChart () {
     CGPoint moveP;
+    __strong NSMutableArray *_chartValues;
 }
-@property (nonatomic, strong) NSArray *chartValues;
 @property (nonatomic, strong) NSMutableArray *chartsData;
 @property (nonatomic) float radius;
 @property (nonatomic) float holeRadius;
@@ -157,16 +157,25 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 }
 
 - (void) setValues:(NSDictionary*)values {
+    if (![values isKindOfClass:[NSDictionary class]]) {
+        [NSException raise:@"VBPieChartException" format:@"values needs to be specified with NSDictionary"];
+    }
     for (NSNumber *key in [values allKeys]) {
-        VBPiePieceData *data = _chartsData[[key intValue]];
+        NSInteger index = [key intValue];
+        VBPiePieceData *data = _chartsData[index];
         data.value = values[key];
+        _chartValues[index][@"value"] = values[key];
     }
     [self _refreshCharts];
 }
 
 - (void) setValue:(NSNumber*)value pieceAtIndex:(NSInteger)index {
+    if (![value isKindOfClass:[NSNumber class]]) {
+        [NSException raise:@"VBPieChartException" format:@"value needs to be NSNumber"];
+    }
     VBPiePieceData *data = _chartsData[index];
     data.value = value;
+    _chartValues[index][@"value"] = value;
     [self _refreshCharts];
 }
 
@@ -180,6 +189,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     [self _refreshCharts];
     
     void (^completionBlock)(void)  = ^(void){
+        [_chartValues removeObjectAtIndex:index];
         [_chartsData removeObjectAtIndex:index];
         [piece removeFromSuperlayer];
         [_pieceArray removeObjectAtIndex:index];
@@ -195,6 +205,23 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     } else {
         [CATransaction setCompletionBlock:completionBlock];
     }
+}
+
+
+- (void) insertChartValue:(NSDictionary*)chartValue atIndex:(NSInteger)index {
+    if (![chartValue isKindOfClass:[NSDictionary class]]) {
+        [NSException raise:@"VBPieChartException" format:@"insert value should be only NSDictionary"];
+    }
+    
+    NSNumber *value = chartValue[@"value"];
+    
+    NSMutableDictionary *mutableChartValue = [NSMutableDictionary dictionaryWithDictionary:chartValue];
+    mutableChartValue[@"value"] = @0;
+    
+    [_chartValues insertObject:mutableChartValue atIndex:index];
+    _presentWithAnimation = NO;
+    [self _updateCharts];
+    [self setValue:value pieceAtIndex:index];
 }
 
 
@@ -365,13 +392,26 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     }
 }
 
+- (NSArray *) chartValues {
+    return [NSArray arrayWithArray:_chartValues];
+}
+
+
 - (void) setChartValues:(NSArray *)chartValues {
-    _chartValues = [NSArray arrayWithArray:chartValues];
+    if (![chartValues isKindOfClass:[NSArray class]]) {
+        [NSException raise:@"VBPieChartException" format:@"chartValues needs to be specified with NSArray"];
+    }
+
+    _chartValues = [NSMutableArray array];
+    for (NSDictionary *pieceValue in chartValues) {
+        [_chartValues addObject:[pieceValue mutableCopy]];
+    }
+    
     [self _updateCharts];
 }
 
 - (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation {
-    [self setChartValues:chartValues animation:animation options:(VBPieChartAnimationFanAll | VBPieChartAnimationTimingLinear)];
+    [self setChartValues:chartValues animation:animation options:VBPieChartAnimationDefault];
 }
 
 - (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation options:(VBPieChartAnimationOptions)options {
@@ -382,7 +422,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     _presentWithAnimation = animation;
     _animationOptions = options;
     _animationDuration = duration;
-    self.chartValues = chartValues;
+    [self setChartValues:chartValues];
 }
 
 

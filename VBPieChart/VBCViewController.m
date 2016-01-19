@@ -70,6 +70,15 @@
     [_chart setLabelsPosition:VBLabelsPositionOnChart];
     
     
+//    [_chart setChartValues:@[
+//                         @{@"name":@"first", @"value":@50, @"color":[UIColor redColor]},
+//                         @{@"name":@"second", @"value":@20, @"color":[UIColor blueColor]},
+//                         @{@"name":@"third", @"value":@40, @"color":[UIColor purpleColor]},
+//                         ]
+//                 animation:YES
+//                  duration:0.5
+//                   options:VBPieChartAnimationDefault];
+    
     self.chartValues = @[
                          @{@"name":@"first", @"value":@50, @"color":[UIColor colorWithHex:0xdd191daa]},
                          @{@"name":@"sec", @"value":@20, @"color":[UIColor colorWithHex:0xd81b60aa]},
@@ -117,6 +126,8 @@
 
 - (IBAction) removeSecond:(id)sender {
     [_chart removePieceAtIndex:1];
+    
+//    [_chart insertChartValue:@{@"name":@"", @"value":@30} atIndex:1];
 }
 
 - (IBAction) progressExample:(id)sender {

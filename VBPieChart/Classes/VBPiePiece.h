@@ -29,6 +29,7 @@
 // Default is NO
 @property (nonatomic, readonly) BOOL accent;
 
+// vector of accent, used in case user touched piece
 @property (nonatomic, readonly) CGPoint accentVector;
 
 // Default is 0.1 (i.e. 10%) of innerRadius

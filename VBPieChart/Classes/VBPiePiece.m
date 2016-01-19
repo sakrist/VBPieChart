@@ -104,26 +104,15 @@
     [self pieceAngle:_angle start:_startAngle];
 }
 
-- (void) pieceAngle:(float)angle start:(float)startAngle {
-    _angle = angle;
-    _endAngle = angle;
-    _startAngle = startAngle;
-    
+- (void) _calculateAccentVector {
     CGSize size = self.frame.size;
-    if (CGSizeEqualToSize(size, CGSizeZero)) {
-        return;
-    }
-    
     CGPoint center = CGPointMake(size.width/2, size.height/2);
-    if (_innerRadius == 0) {
-        _innerRadius = size.width/2;
-    }
     
     self.accentValue = _innerRadius*_accentPrecent;
     
     // calculate vector of moving
     
-    float calcAngle = startAngle+angle/2;
+    float calcAngle = _startAngle+_angle/2;
     
     float x = center.x + _innerRadius*cos(calcAngle);
     float y = center.y + _innerRadius*sin(calcAngle);
@@ -145,12 +134,30 @@
         _currentMatrix = matrix;
         
 #if DEBUG
-//        CALayer *layer = [CALayer layer];
-//        [layer setFrame:CGRectMake(x, y, 2, 2)];
-//        layer.backgroundColor = [UIColor redColor].CGColor;
-//        [self addSublayer:layer];
+        //        CALayer *layer = [CALayer layer];
+        //        [layer setFrame:CGRectMake(x, y, 2, 2)];
+        //        layer.backgroundColor = [UIColor redColor].CGColor;
+        //        [self addSublayer:layer];
 #endif
     }
+}
+
+
+- (void) pieceAngle:(float)angle start:(float)startAngle {
+    _angle = angle;
+    _endAngle = angle;
+    _startAngle = startAngle;
+    
+    CGSize size = self.frame.size;
+    if (CGSizeEqualToSize(size, CGSizeZero)) {
+        return;
+    }
+    
+    if (_innerRadius == 0) {
+        _innerRadius = size.width/2;
+    }
+    
+    [self _calculateAccentVector];
     
     if (startAngle > -.01 && angle > -.01) {
         _endAngle = startAngle+angle;
@@ -239,6 +246,7 @@
     
     if ([anim isKindOfClass:[CAAnimationGroup class]]) {
         [self __angle:_endAngle];
+        [self _calculateAccentVector];
         return;
     } else {
         if ([((CABasicAnimation*)anim).keyPath isEqualToString:@"endAngle"]) {
@@ -252,10 +260,13 @@
         }
     }
     
-    if (_endAnimationBlock != nil) {
+    [self _calculateAccentVector];
+    
+    if (_endAnimationBlock != nil && flag) {
         _endAnimationBlock();
         _endAnimationBlock = nil;
     }
+    
 }
 
 - (void) _animate {

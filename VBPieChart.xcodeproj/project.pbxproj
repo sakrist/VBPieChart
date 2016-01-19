@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D2271CC01C4D85CE00AF8B8B /* VBCSimpleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2271CBF1C4D85CE00AF8B8B /* VBCSimpleTests.m */; };
+		D2271CE81C4E509200AF8B8B /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D2271CE71C4E509200AF8B8B /* UIColor+HexColor.m */; };
 		D2C0FB6818B01CBA00C51D08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6718B01CBA00C51D08 /* Foundation.framework */; };
 		D2C0FB6A18B01CBA00C51D08 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6918B01CBA00C51D08 /* CoreGraphics.framework */; };
 		D2C0FB6C18B01CBA00C51D08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6B18B01CBA00C51D08 /* UIKit.framework */; };
@@ -19,7 +20,6 @@
 		D2C0FB8118B01CBA00C51D08 /* VBCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FB8018B01CBA00C51D08 /* VBCViewController.m */; };
 		D2C0FB8318B01CBA00C51D08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C0FB8218B01CBA00C51D08 /* Images.xcassets */; };
 		D2C0FBA318B01DC000C51D08 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FBA218B01DC000C51D08 /* QuartzCore.framework */; };
-		D2C0FBAD18B022DA00C51D08 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FBAC18B022DA00C51D08 /* UIColor+HexColor.m */; };
 		D2C0FBB018B02C0900C51D08 /* VBPiePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */; };
 		D2C0FBB318B02C2400C51D08 /* VBPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FBB218B02C2400C51D08 /* VBPieChart.m */; };
 /* End PBXBuildFile section */
@@ -38,6 +38,8 @@
 		D2271CB51C4D85A400AF8B8B /* VBPieChartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VBPieChartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2271CB91C4D85A400AF8B8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2271CBF1C4D85CE00AF8B8B /* VBCSimpleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCSimpleTests.m; sourceTree = "<group>"; };
+		D2271CE61C4E509200AF8B8B /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
+		D2271CE71C4E509200AF8B8B /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		D2C0FB6418B01CBA00C51D08 /* VBPieChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VBPieChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C0FB6718B01CBA00C51D08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2C0FB6918B01CBA00C51D08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -55,8 +57,6 @@
 		D2C0FB8218B01CBA00C51D08 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D2C0FB8918B01CBA00C51D08 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D2C0FBA218B01DC000C51D08 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		D2C0FBAB18B022DA00C51D08 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+HexColor.h"; path = "Classes/UIColor+HexColor.h"; sourceTree = "<group>"; };
-		D2C0FBAC18B022DA00C51D08 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HexColor.m"; path = "Classes/UIColor+HexColor.m"; sourceTree = "<group>"; };
 		D2C0FBAE18B02C0900C51D08 /* VBPiePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VBPiePiece.h; path = Classes/VBPiePiece.h; sourceTree = "<group>"; };
 		D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VBPiePiece.m; path = Classes/VBPiePiece.m; sourceTree = "<group>"; };
 		D2C0FBB118B02C2400C51D08 /* VBPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VBPieChart.h; path = Classes/VBPieChart.h; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 				D2C0FBAE18B02C0900C51D08 /* VBPiePiece.h */,
 				D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */,
 				D2D6AD381C4BC97D00125D9E /* VBPiePiece_private.h */,
-				D2C0FBAB18B022DA00C51D08 /* UIColor+HexColor.h */,
-				D2C0FBAC18B022DA00C51D08 /* UIColor+HexColor.m */,
+				D2271CE61C4E509200AF8B8B /* UIColor+HexColor.h */,
+				D2271CE71C4E509200AF8B8B /* UIColor+HexColor.m */,
 				D2C0FB8218B01CBA00C51D08 /* Images.xcassets */,
 				D2C0FB6E18B01CBA00C51D08 /* Supporting Files */,
 			);
@@ -271,10 +271,10 @@
 			files = (
 				D2C0FB7818B01CBA00C51D08 /* VBCAppDelegate.m in Sources */,
 				D2C0FB7418B01CBA00C51D08 /* main.m in Sources */,
-				D2C0FBAD18B022DA00C51D08 /* UIColor+HexColor.m in Sources */,
 				D2C0FB8118B01CBA00C51D08 /* VBCViewController.m in Sources */,
 				D2C0FBB318B02C2400C51D08 /* VBPieChart.m in Sources */,
 				D2C0FBB018B02C0900C51D08 /* VBPiePiece.m in Sources */,
+				D2271CE81C4E509200AF8B8B /* UIColor+HexColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +472,7 @@
 				D2271CBD1C4D85A400AF8B8B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D2C0FB5F18B01CBA00C51D08 /* Build configuration list for PBXProject "VBPieChart" */ = {
 			isa = XCConfigurationList;

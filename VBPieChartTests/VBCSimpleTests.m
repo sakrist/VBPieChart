@@ -57,6 +57,13 @@
     [super tearDown];
 }
 
+
+- (void) testFailEmptyDictionaryInsert {
+    XCTAssertThrowsSpecific([_chart setChartValues:@{}], NSException);
+    
+    XCTAssertThrowsSpecific([_chart setChartValues:nil], NSException);
+}
+
 - (void) testEmptyArrayAndAnimated {
     [_chart setChartValues:chartValues animation:YES];
     [_chart setChartValues:@[] animation:YES];
@@ -93,7 +100,7 @@
 - (void) testSetValueAtIndex {
     [_chart setChartValues:chartValues animation:NO];
     
-    [_chart setValue:@"sss" pieceAtIndex:3]; // test for wrong
+    XCTAssertThrowsSpecific([_chart setValue:@"sss" pieceAtIndex:3], NSException); // test for wrong
 
     XCTAssertThrowsSpecific([_chart setValue:@{} pieceAtIndex:3], NSException); // test for wrong
 
