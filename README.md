@@ -5,6 +5,8 @@
 
 Animated Pie Chart control for iOS apps, based on CALayer. Very easy in use and have custom labeling.
 
+<img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%">
+
 ##Usage
 
 
@@ -104,4 +106,4 @@ Example: <br />
 `[chartView setValues:@{@(0) : @(50), @(1) : @(70)}]; // set 50 for first and 70 for second sections` <br />
 
 ## Screenshots
-<img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%">
+
