@@ -1,3 +1,8 @@
+#### [1.1.0] - 2016-20-01
+* `VBPiePiece` - made fully private, and all members are `readonly`
+* from float -> double
+* some little more commnets
+
 #### [1.0.0] - 2016-19-01
 * UIColor+HexColor - moved out of pod
 * new documentation for `VBPieChart` class

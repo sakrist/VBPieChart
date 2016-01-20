@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "VBPieChart"
-  s.version      = "1.0.0"
+  s.version      = "1.1.0"
   s.summary      = "Pie Chart with different animations to present."
 
   s.description  = <<-DESC
@@ -38,7 +38,6 @@ Pod::Spec.new do |s|
   #
 
   s.license      = { :type => "MIT", :file => "README.md" }
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -51,9 +50,9 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
   
-  s.author             = "Volodymyr Boichentsov"
+  # s.author             = "Volodymyr Boichentsov"
   # Or just: s.author    = "Volodymyr Boichentsov"
-  # s.authors            = { "Volodymyr Boichentsov" => "sakristx@gmail.com" }
+  s.authors            = { "Volodymyr Boichentsov" => "sakristx@gmail.com" }
   s.social_media_url   = "http://twitter.com/sakrist"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -76,7 +75,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/sakrist/VBPieChart.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/sakrist/VBPieChart.git", :tag => "1.1.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -90,7 +89,7 @@ Pod::Spec.new do |s|
   s.source_files  = "VBPieChart/Classes", "VBPieChart/Classes/*.{h,m}"
   #s.exclude_files = "Classes/Exclude"
 
-  # s.public_header_files = "Classes/**/*.h"
+  s.public_header_files = "VBPieChart/Classes/VBPieChart.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -113,7 +112,7 @@ Pod::Spec.new do |s|
   #  the lib prefix of their name.
   #
 
-  s.framework  = "QuartzCore"
+  s.frameworks  = "UIKit", "QuartzCore"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
   # s.library   = "iconv"

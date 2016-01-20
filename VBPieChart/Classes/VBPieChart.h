@@ -61,30 +61,30 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer, NSInteger index);
  @abstract Hole in center of diagram, precent of radius
  @note Default is 0.2, from 0 to 1
  */
-@property (nonatomic) float holeRadiusPrecent;
+@property (nonatomic) double holeRadiusPrecent;
 
 /*!
  @abstract Radius of diagram dependce to view size
  @note Default is 0.9, possible value from 0 to 1.
 */
-@property (nonatomic) float radiusPrecent;
+@property (nonatomic) double radiusPrecent;
 
 /*!
  @abstract Default is 0.25, i.e. 25% of radius.
  */
-@property (nonatomic) float maxAccentPrecent;
+@property (nonatomic) double maxAccentPrecent;
 
 /*!
  @abstract Length of circle, from 0 to M_PI*2.
  @note Default M_PI*2.
  */
-@property (nonatomic) float length;
+@property (nonatomic) double length;
 
 /*!
  @abstract Start angle, from 0 to M_PI*2
  @note Default 0.
  */
-@property (nonatomic) float startAngle;
+@property (nonatomic) double startAngle;
 
 /*!
  @abstract Set new values by indexes for already exist pieces. Animated.
@@ -192,7 +192,7 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer, NSInteger index);
  @abstract Setup chart values with animation options.
  @param chartValues NSArray main data for chart pie
  @param animation BOOL flag present with animation
- @param duration float Duration of animation.
+ @param duration double Duration of animation.
  @param options Options for animation.
  @code
  [_chart setChartValues:@[
@@ -205,12 +205,13 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer, NSInteger index);
              options:VBPieChartAnimationDefault];
  @endcode
  */
-- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options;
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(double)duration options:(VBPieChartAnimationOptions)options;
 
 @end
 
 
 @interface VBPieChart (_deprecated)
+// to enbale interaction with chart. Deprecated because useless and can be done in another way.
 @property (nonatomic) BOOL enableInteractive DEPRECATED_ATTRIBUTE;
 @property (nonatomic, strong) UIColor *strokeColor DEPRECATED_MSG_ATTRIBUTE("Use strokeColor parameter for value");
 @property (nonatomic) BOOL enableStrokeColor DEPRECATED_MSG_ATTRIBUTE("Use strokeColor parameter for value");

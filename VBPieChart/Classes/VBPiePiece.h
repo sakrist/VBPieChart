@@ -8,39 +8,60 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface VBPiePiece : CAShapeLayer
+/*!
+ Private class
+ 
+ Structure that represent one piece of Pie Chart.
+ */
+@interface VBPiePiece : CAShapeLayer {
+    @package
+    double _value;
+    double _innerRadius;
+    double _outerRadius;
+}
 
-@property (nonatomic) float innerRadius;
-@property (nonatomic) float outerRadius;
 
-@property (nonatomic) double value;
-@property (nonatomic, strong) NSString *pieceName;
+/*!
+ Radius of pie chart.
+ */
+@property (nonatomic, readonly) double innerRadius;
 
-/*
+/*!
+ Radius of hole in pie chart.
+ */
+@property (nonatomic, readonly) double outerRadius;
+
+/*! 
+ Value that represent size of piece. Set from parent VBPieChart instance.
+ */
+@property (nonatomic, readonly) double value;
+
+/*!
+ Name will be set from chartValues of VBPieChart instance or value of current instance.
+ */
+@property (nonatomic, strong, readonly) NSString *pieceName;
+
+/*!
  Actual angle of segment
  */
-@property (nonatomic, readonly) float angle;
+@property (nonatomic, readonly) double angle;
 
-/*
+/*!
  Start angle for segment
  */
-@property (nonatomic, readonly) float startAngle;
+@property (nonatomic, readonly) double startAngle;
 
-// Default is NO
+/*!
+ Flag that say if piece can be selected.
+ Default is NO
+ */
 @property (nonatomic, readonly) BOOL accent;
 
 // vector of accent, used in case user touched piece
 @property (nonatomic, readonly) CGPoint accentVector;
 
 // Default is 0.1 (i.e. 10%) of innerRadius
-@property (nonatomic) float accentPrecent;
-
-// Value in range 0..1
-- (BOOL) animateToAccent:(float)accentPrecent;
-
-
-// Values in radians
-- (void) pieceAngle:(float)angle start:(float)startAngle;
+@property (nonatomic, readonly) double accentPrecent;
 
 
 @end

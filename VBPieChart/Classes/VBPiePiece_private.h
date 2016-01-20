@@ -9,8 +9,7 @@
 #ifndef VBPiePiece_private_h
 #define VBPiePiece_private_h
 
-
-
+// Private class
 @interface VBPiePieceData : NSObject
 @property (nonatomic) NSInteger index;
 @property (nonatomic, retain) NSString *name;

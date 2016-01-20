@@ -24,24 +24,33 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     __strong NSMutableArray *_chartValues;
 }
 @property (nonatomic, strong) NSMutableArray *chartsData;
-@property (nonatomic) float radius;
-@property (nonatomic) float holeRadius;
+@property (nonatomic) double radius;
+@property (nonatomic) double holeRadius;
 @property (nonatomic, weak) VBPiePiece *hitLayer;
 
 @property (nonatomic) BOOL presentWithAnimation;
 @property (nonatomic) VBPieChartAnimationOptions animationOptions;
-@property (nonatomic) float animationDuration;
+@property (nonatomic) double animationDuration;
 
 @property (nonatomic, strong) NSMutableArray *pieceArray;
 
 @end
 
 @interface VBPiePiece ()
-- (void) _animateToAngle:(float)angle startAngle:(float)startAngle;
+
+// setup piece Angle (then will be calcuated length) and Start Angle.
+- (void) pieceAngle:(double)angle start:(double)startAngle;
+
+// animate to accent position
+- (BOOL) animateToAccent:(double)accentPrecent;
+
+// animations methods
+- (void) _animateToAngle:(double)angle startAngle:(double)startAngle;
 - (void) _animate;
 - (void) setAnimationOptions:(VBPieChartAnimationOptions)options;
-- (void) setAnimationDuration:(float)duration;
+- (void) setAnimationDuration:(double)duration;
 
+// labels control methods
 - (void) setLabelsPosition:(VBLabelsPosition)labelsPosition;
 - (void) setLabelBlock:(VBLabelBlock)labelBlock;
 - (void) setLabelColor:(UIColor *)labelColor;
@@ -229,7 +238,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     
     double fullValue = 0;
     for (VBPiePieceData *data in _chartsData) {
-        fullValue += fabsf([data.value floatValue]);
+        fullValue += fabs([data.value doubleValue]);
     }
     
     CGFloat onePrecent = fullValue*0.01;
@@ -301,7 +310,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
             [_chartsData addObject:data];
         }
         
-        fullValue += fabsf([data.value floatValue]);
+        fullValue += fabs([data.value doubleValue]);
         index++;
     }
     
@@ -344,9 +353,9 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
         
         [piece setLabelsPosition:_labelsPosition];
         [piece setLabelBlock:_labelBlock];
-        [piece setValue:pieceValuePrecents];
-        [piece setInnerRadius:_radius];
-        [piece setOuterRadius:_holeRadius];
+        piece->_value = pieceValuePrecents;
+        piece->_innerRadius = _radius;
+        piece->_outerRadius = _holeRadius;
         
         [piece setData:data];
         
@@ -418,7 +427,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     [self setChartValues:chartValues animation:animation duration:0.6 options:options];
 }
 
-- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(float)duration options:(VBPieChartAnimationOptions)options {
+- (void) setChartValues:(NSArray *)chartValues animation:(BOOL)animation duration:(double)duration options:(VBPieChartAnimationOptions)options {
     _presentWithAnimation = animation;
     _animationOptions = options;
     _animationDuration = duration;
@@ -454,7 +463,7 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 //    delta.y = (p1.y - p2.y);
 //        
 //    if ([_hitLayer isKindOfClass:[VBPiePiece class]]) {
-//        float d = _hitLayer.accentPrecent+((-delta.x+delta.y)/2/_radius);
+//        double d = _hitLayer.accentPrecent+((-delta.x+delta.y)/2/_radius);
 //        d = MIN(MAX(0, d), _maxAccentPrecent);
 //
 //        [_hitLayer setAccentPrecent:d];

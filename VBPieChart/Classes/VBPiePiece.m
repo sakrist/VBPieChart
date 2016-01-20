@@ -16,16 +16,16 @@
 
 @interface VBPiePiece ()
 
-@property (nonatomic) float accentValue;
+@property (nonatomic) double accentValue;
 
-@property (nonatomic) float endAngle;
+@property (nonatomic) double endAngle;
 
 @property (nonatomic) CGAffineTransform currentMatrix;
 
 @property (nonatomic, copy) void (^endAnimationBlock)(void);
 
 @property (nonatomic) VBPieChartAnimationOptions animationOptions;
-@property (nonatomic) float animationDuration;
+@property (nonatomic) double animationDuration;
 
 @property (nonatomic) VBLabelsPosition labelsPosition;
 
@@ -40,13 +40,13 @@
 
 
 @implementation VBPiePiece {
-    float temp_innerRadius;
-    float temp_outerRadius;
+    double temp_innerRadius;
+    double temp_outerRadius;
 }
 
 - (id) init {
     self = [super init];
-    self.innerRadius = 0;
+    self->_innerRadius = 0;
     self.accentPrecent = 0.0;
     self.endAnimationBlock = nil;
     
@@ -94,7 +94,7 @@
     }
 }
 
-- (void) setAccentPrecent:(float)accentPrecent {
+- (void) setAccentPrecent:(double)accentPrecent {
     _accentPrecent = accentPrecent;
     _accent = YES;
     [self update];
@@ -106,21 +106,21 @@
 
 - (void) _calculateAccentVector {
     CGSize size = self.frame.size;
-    CGPoint center = CGPointMake(size.width/2, size.height/2);
+    CGPoint center = CGPointMake(size.width/2.0, size.height/2.0);
     
     self.accentValue = _innerRadius*_accentPrecent;
     
     // calculate vector of moving
     
-    float calcAngle = _startAngle+_angle/2;
+    double calcAngle = _startAngle+_angle/2.0;
     
-    float x = center.x + _innerRadius*cos(calcAngle);
-    float y = center.y + _innerRadius*sin(calcAngle);
-    float x_outer = center.x + _outerRadius*cos(calcAngle);
-    float y_outer = center.y + _outerRadius*sin(calcAngle);
+    double x = center.x + _innerRadius*cos(calcAngle);
+    double y = center.y + _innerRadius*sin(calcAngle);
+    double x_outer = center.x + _outerRadius*cos(calcAngle);
+    double y_outer = center.y + _outerRadius*sin(calcAngle);
     
     CGPoint v = CGPointMake((x-x_outer), (y-y_outer));
-    float length = sqrt(v.x * v.x + v.y * v.y);
+    double length = sqrt(v.x * v.x + v.y * v.y);
     v.x /= length;
     v.y /= length;
     _accentVector = v;
@@ -143,7 +143,7 @@
 }
 
 
-- (void) pieceAngle:(float)angle start:(float)startAngle {
+- (void) pieceAngle:(double)angle start:(double)startAngle {
     _angle = angle;
     _endAngle = angle;
     _startAngle = startAngle;
@@ -154,7 +154,7 @@
     }
     
     if (_innerRadius == 0) {
-        _innerRadius = size.width/2;
+        _innerRadius = size.width/2.0;
     }
     
     [self _calculateAccentVector];
@@ -173,7 +173,7 @@
     if (_animationOptions & VBPieChartAnimationFanAll) {
         arcAnimation.duration = _animationDuration/((M_PI*2)/_angle);
     } else if (_animationOptions & VBPieChartAnimationGrowth || _animationOptions & VBPieChartAnimationGrowthBack) {
-        arcAnimation.duration = _animationDuration/(float)[[self.superlayer sublayers] count];
+        arcAnimation.duration = _animationDuration/(double)[[self.superlayer sublayers] count];
     } else if (_animationOptions & VBPieChartAnimationGrowthAll || _animationOptions & VBPieChartAnimationGrowthBackAll) {
         arcAnimation.duration = _animationDuration;
     } else if (_animationOptions & VBPieChartAnimationFan) {
@@ -272,16 +272,16 @@
 - (void) _animate {
     if (_animationOptions & VBPieChartAnimationFan || _animationOptions & VBPieChartAnimationFanAll) {
         [self createArcAnimationForKey:@"endAngle"
-                             fromValue:[NSNumber numberWithFloat:0]
-                               toValue:[NSNumber numberWithFloat:_angle]
+                             fromValue:[NSNumber numberWithDouble:0]
+                               toValue:[NSNumber numberWithDouble:_angle]
                               delegate:self];
         [self __angle:0];
     }
     if (_animationOptions & VBPieChartAnimationGrowthBack || _animationOptions & VBPieChartAnimationGrowthBackAll) {
         temp_outerRadius = _outerRadius;
         [self createArcAnimationForKey:@"outerRadius"
-                             fromValue:[NSNumber numberWithFloat:_innerRadius]
-                               toValue:[NSNumber numberWithFloat:_outerRadius]
+                             fromValue:[NSNumber numberWithDouble:_innerRadius]
+                               toValue:[NSNumber numberWithDouble:_outerRadius]
                               delegate:self];
         [self __outerRadius:_innerRadius];
     }
@@ -289,8 +289,8 @@
     if (_animationOptions & VBPieChartAnimationGrowth || _animationOptions & VBPieChartAnimationGrowthAll) {
         temp_innerRadius = _innerRadius;
         [self createArcAnimationForKey:@"innerRadius"
-                             fromValue:[NSNumber numberWithFloat:_outerRadius]
-                               toValue:[NSNumber numberWithFloat:_innerRadius]
+                             fromValue:[NSNumber numberWithDouble:_outerRadius]
+                               toValue:[NSNumber numberWithDouble:_innerRadius]
                               delegate:self];
         [self __innerRadius:_outerRadius];
     }
@@ -302,7 +302,7 @@
     [CATransaction commit];
 }
 
-- (void) _animateToAngle:(float)angle startAngle:(float)startAngle {
+- (void) _animateToAngle:(double)angle startAngle:(double)startAngle {
     
     if (![CATransaction disableActions]) {
         CABasicAnimation *endAngleAnimation = [CABasicAnimation animationWithKeyPath:@"endAngle"];
@@ -332,7 +332,7 @@
 
 
 - (CGMutablePathRef) refreshPath {
-    CGPoint center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    CGPoint center = CGPointMake(self.frame.size.width/2.0, self.frame.size.height/2);
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathAddRelativeArc(path, &_currentMatrix, center.x, center.y, _innerRadius, _startAngle, _angle);
     CGPathAddRelativeArc(path, &_currentMatrix, center.x, center.y, _outerRadius, _startAngle+_angle , -_angle);
@@ -359,16 +359,16 @@
                     center = _labelBlock(self, _pieceData.index);
                     break;
                 }
-                center.x += size.width/2;
-                center.y += size.height/2;
+                center.x += size.width/2.0;
+                center.y += size.height/2.0;
                 break;
                 
             case VBLabelsPositionOutChart:
             {
                 CGFloat h = sqrt(center.x*center.x + center.y*center.y);
-                CGFloat labelr = MIN(superSize.width, superSize.height) / 2 + _label.frame.size.width/2;
-                center.x = superSize.width/2 + (center.x/h * labelr);
-                center.y = superSize.height/2 + (center.y/h * labelr);
+                CGFloat labelr = MIN(superSize.width, superSize.height) / 2.0 + _label.frame.size.width/2.0;
+                center.x = superSize.width/2.0 + (center.x/h * labelr);
+                center.y = superSize.height/2.0 + (center.y/h * labelr);
             }
                 break;
             case VBLabelsPositionNone:
@@ -399,7 +399,7 @@
 }
 
 
-- (BOOL) animateToAccent:(float)accentPrecent {
+- (BOOL) animateToAccent:(double)accentPrecent {
 
     if ([[self animationKeys] count] != 0) {
         return NO;
@@ -447,25 +447,25 @@
     return [NSString stringWithFormat:@"<VBPiePiece: %p, _startAngle=%f, _endAngle=%f>", self, _startAngle, _endAngle];
 }
 
-- (void) __startAngle:(float)startAngle {
+- (void) __startAngle:(double)startAngle {
     _startAngle = startAngle;
 }
 
-- (void) __angle:(float)angle {
+- (void) __angle:(double)angle {
     _angle = angle;
     CGPathRef path = [self refreshPath];
     self.path = path;
     CGPathRelease(path);
 }
 
-- (void) __innerRadius:(float)radius {
+- (void) __innerRadius:(double)radius {
     _innerRadius = radius;
     CGPathRef path = [self refreshPath];
     self.path = path;
     CGPathRelease(path);
 }
 
-- (void) __outerRadius:(float)radius {
+- (void) __outerRadius:(double)radius {
     _outerRadius = radius;
     CGPathRef path = [self refreshPath];
     self.path = path;
