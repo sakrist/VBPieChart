@@ -1,3 +1,7 @@
+#### [1.1.1] - 2016-20-01
+* fixed initWithFrame
+* improved documentation for simple start
+
 #### [1.1.0] - 2016-20-01
 * `VBPiePiece` - made fully private, and all members are `readonly`
 * from float -> double

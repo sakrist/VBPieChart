@@ -42,6 +42,19 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer, NSInteger index);
 
 /*!
  @abstract Animatable Pie Chart control. Have abilities insert and delete values with animation.
+ 
+ Example for simple start:
+ @code
+ _chart = [[VBPieChart alloc] initWithFrame:CGRectMake(10, 50, 300, 300)];
+ [self.view addSubview:_chart];
+ _chart.holeRadiusPrecent = 0.2;
+ _chart.startAngle = M_PI+M_PI_2;
+ [_chart setChartValues:@[
+     @{@"name":@"first", @"value":@50, @"color":[UIColor redColor]},
+     @{@"name":@"second", @"value":@20, @"color":[UIColor blueColor]},
+     @{@"name":@"third", @"value":@40, @"color":[UIColor purpleColor]}]
+              animation:YES];
+ @endcode
  */
 @interface VBPieChart : UIView
 

@@ -72,6 +72,12 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     return self;
 }
 
+- (instancetype) initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    [self configure];
+    return self;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     [self configure];
@@ -84,7 +90,8 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     self.startAngle = 0;
     self.length = M_PI*2;
     self.radiusPrecent = 0.9;
-    self.holeRadius = 0;
+    self.radius = self.frame.size.width/2*_radiusPrecent;
+    self.holeRadius = _radius*_holeRadiusPrecent;
     self.holeRadiusPrecent = 0.2;
     self.maxAccentPrecent = 0.25;
     
