@@ -10,15 +10,7 @@
 #import "UIColor+HexColor.h"
 
 
-@implementation UIColor (i7HexColor)
-
-- (NSString *) hexString {
-	
-    const CGFloat *_color = CGColorGetComponents(self.CGColor);
-    NSString *hex = [NSString stringWithFormat:@"#%02X%02X%02X", (int)(_color[0]*255.0), (int)(_color[1]*255.0), (int)(_color[2]*255.0)];
-    
-    return hex;
-}
+@implementation UIColor (HexColor)
 
 + (UIColor *) colorWithHex:(int)color {
 
@@ -28,15 +20,6 @@
     float alpha = (color & 0x000000ff);
     
     return [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:alpha/255.0];
-}
-
-+ (UIColor *) colorWithHexRed:(int)red green:(char)green blue:(char)blue alpha:(char)alpha {
-    int x = 0;
-    x |= (red & 0xff) << 24;
-    x |= (green & 0xff) << 16;
-    x |= (blue & 0xff) << 8;
-    x |= (alpha & 0xff);
-    return [UIColor colorWithHex:x];
 }
 
 
@@ -75,18 +58,4 @@
 	
 
 }
-
-+ (UIColor *) colorWithIntegerRed:(float)red green:(float)green blue:(float)blue alpha:(float)alpha {
-
-    if (alpha > 1 ) {
-        alpha = alpha/255.f;
-    }
-    
-    return [UIColor colorWithRed:red/255.f
-                           green:green/255.f
-                            blue:blue/255.f
-                           alpha:alpha];
-}
-
-
 @end

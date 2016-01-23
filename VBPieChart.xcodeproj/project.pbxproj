@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D2271CC01C4D85CE00AF8B8B /* VBCSimpleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2271CBF1C4D85CE00AF8B8B /* VBCSimpleTests.m */; };
-		D2271CE81C4E509200AF8B8B /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D2271CE71C4E509200AF8B8B /* UIColor+HexColor.m */; };
 		D2C0FB6818B01CBA00C51D08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6718B01CBA00C51D08 /* Foundation.framework */; };
 		D2C0FB6A18B01CBA00C51D08 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6918B01CBA00C51D08 /* CoreGraphics.framework */; };
 		D2C0FB6C18B01CBA00C51D08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FB6B18B01CBA00C51D08 /* UIKit.framework */; };
@@ -22,6 +21,9 @@
 		D2C0FBA318B01DC000C51D08 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C0FBA218B01DC000C51D08 /* QuartzCore.framework */; };
 		D2C0FBB018B02C0900C51D08 /* VBPiePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */; };
 		D2C0FBB318B02C2400C51D08 /* VBPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C0FBB218B02C2400C51D08 /* VBPieChart.m */; };
+		D2DBF2031C53BCAF006B868D /* pattern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2DBF2021C53BCAF006B868D /* pattern.jpg */; };
+		D2DBF2051C53BD1D006B868D /* pattern2.png in Resources */ = {isa = PBXBuildFile; fileRef = D2DBF2041C53BD1D006B868D /* pattern2.png */; };
+		D2DBF2081C540272006B868D /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DBF2071C540272006B868D /* UIColor+HexColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +40,6 @@
 		D2271CB51C4D85A400AF8B8B /* VBPieChartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VBPieChartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2271CB91C4D85A400AF8B8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2271CBF1C4D85CE00AF8B8B /* VBCSimpleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBCSimpleTests.m; sourceTree = "<group>"; };
-		D2271CE61C4E509200AF8B8B /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
-		D2271CE71C4E509200AF8B8B /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		D2C0FB6418B01CBA00C51D08 /* VBPieChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VBPieChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C0FB6718B01CBA00C51D08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2C0FB6918B01CBA00C51D08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,6 +62,10 @@
 		D2C0FBB118B02C2400C51D08 /* VBPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VBPieChart.h; path = Classes/VBPieChart.h; sourceTree = "<group>"; };
 		D2C0FBB218B02C2400C51D08 /* VBPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VBPieChart.m; path = Classes/VBPieChart.m; sourceTree = "<group>"; };
 		D2D6AD381C4BC97D00125D9E /* VBPiePiece_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VBPiePiece_private.h; path = Classes/VBPiePiece_private.h; sourceTree = "<group>"; };
+		D2DBF2021C53BCAF006B868D /* pattern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pattern.jpg; sourceTree = "<group>"; };
+		D2DBF2041C53BD1D006B868D /* pattern2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern2.png; sourceTree = "<group>"; };
+		D2DBF2061C540272006B868D /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+HexColor.h"; path = "Classes/UIColor+HexColor.h"; sourceTree = "<group>"; };
+		D2DBF2071C540272006B868D /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HexColor.m"; path = "Classes/UIColor+HexColor.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,8 +144,8 @@
 				D2C0FBAE18B02C0900C51D08 /* VBPiePiece.h */,
 				D2C0FBAF18B02C0900C51D08 /* VBPiePiece.m */,
 				D2D6AD381C4BC97D00125D9E /* VBPiePiece_private.h */,
-				D2271CE61C4E509200AF8B8B /* UIColor+HexColor.h */,
-				D2271CE71C4E509200AF8B8B /* UIColor+HexColor.m */,
+				D2DBF2061C540272006B868D /* UIColor+HexColor.h */,
+				D2DBF2071C540272006B868D /* UIColor+HexColor.m */,
 				D2C0FB8218B01CBA00C51D08 /* Images.xcassets */,
 				D2C0FB6E18B01CBA00C51D08 /* Supporting Files */,
 			);
@@ -151,6 +155,8 @@
 		D2C0FB6E18B01CBA00C51D08 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D2DBF2021C53BCAF006B868D /* pattern.jpg */,
+				D2DBF2041C53BD1D006B868D /* pattern2.png */,
 				D2C0FB6F18B01CBA00C51D08 /* VBPieChart-Info.plist */,
 				D2C0FB7018B01CBA00C51D08 /* InfoPlist.strings */,
 				D2C0FB7318B01CBA00C51D08 /* main.m */,
@@ -249,8 +255,10 @@
 			files = (
 				D2C0FB7E18B01CBA00C51D08 /* Main_iPad.storyboard in Resources */,
 				D2C0FB8318B01CBA00C51D08 /* Images.xcassets in Resources */,
+				D2DBF2031C53BCAF006B868D /* pattern.jpg in Resources */,
 				D2C0FB7B18B01CBA00C51D08 /* Main_iPhone.storyboard in Resources */,
 				D2C0FB7218B01CBA00C51D08 /* InfoPlist.strings in Resources */,
+				D2DBF2051C53BD1D006B868D /* pattern2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +282,7 @@
 				D2C0FB8118B01CBA00C51D08 /* VBCViewController.m in Sources */,
 				D2C0FBB318B02C2400C51D08 /* VBPieChart.m in Sources */,
 				D2C0FBB018B02C0900C51D08 /* VBPiePiece.m in Sources */,
-				D2271CE81C4E509200AF8B8B /* UIColor+HexColor.m in Sources */,
+				D2DBF2081C540272006B868D /* UIColor+HexColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

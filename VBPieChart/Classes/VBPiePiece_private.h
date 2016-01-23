@@ -18,6 +18,9 @@
 @property (nonatomic, retain) UIColor *labelColor;
 @property (nonatomic, retain) UIColor *strokeColor;
 @property (nonatomic) BOOL accent;
+
++ (UIColor*) defaultColors:(NSInteger)index;
++ (VBPiePieceData*) pieceDataWith:(NSDictionary*)object;
 @end
 
 

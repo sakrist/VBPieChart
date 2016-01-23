@@ -9,17 +9,13 @@
 #import <QuartzCore/QuartzCore.h>
 
 /*!
- Private class
- 
  Structure that represent one piece of Pie Chart.
  */
 @interface VBPiePiece : CAShapeLayer {
     @package
-    double _value;
     double _innerRadius;
     double _outerRadius;
 }
-
 
 /*!
  Radius of pie chart.
@@ -31,20 +27,10 @@
  */
 @property (nonatomic, readonly) double outerRadius;
 
-/*! 
- Value that represent size of piece. Set from parent VBPieChart instance.
- */
-@property (nonatomic, readonly) double value;
-
 /*!
  Name will be set from chartValues of VBPieChart instance or value of current instance.
  */
-@property (nonatomic, strong, readonly) NSString *pieceName;
-
-/*!
- Actual angle of segment
- */
-@property (nonatomic, readonly) double angle;
+@property (nonatomic, strong) NSString *pieceName;
 
 /*!
  Start angle for segment
@@ -52,16 +38,27 @@
 @property (nonatomic, readonly) double startAngle;
 
 /*!
+ Actual angle of segment
+ */
+@property (nonatomic, readonly) double angle;
+
+/*!
  Flag that say if piece can be selected.
  Default is NO
  */
 @property (nonatomic, readonly) BOOL accent;
 
-// vector of accent, used in case user touched piece
+/*!
+ Vector of accent, used in case user touched piece
+ */
 @property (nonatomic, readonly) CGPoint accentVector;
 
 // Default is 0.1 (i.e. 10%) of innerRadius
 @property (nonatomic, readonly) double accentPrecent;
 
+/*!
+ Can be overwritten to present another type of chart
+ */
+- (CGMutablePathRef) generatePath;
 
 @end

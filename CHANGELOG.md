@@ -1,3 +1,16 @@
+
+#### [1.2.0] - 2016-20-01
+* fixed `removePieceAtIndex:`
+* fixed `insertChartValue:atIndex:`
+* `setValues:` - deleted, use `setValue:pieceAtIndex:`
+* improved documentation for simple start
+* added couple more examples
+* JSON example
+* fixed animations
+* UIColor category included back for JSON reason
+
+
+
 #### [1.1.1] - 2016-20-01
 * fixed initWithFrame
 * improved documentation for simple start

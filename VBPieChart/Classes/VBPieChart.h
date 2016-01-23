@@ -99,20 +99,6 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer, NSInteger index);
  */
 @property (nonatomic) double startAngle;
 
-/*!
- @abstract Set new values by indexes for already exist pieces. Animated.
- @param values NSDictionary with new values for pieces
- @note To disable animation use CATransaction, example:
-@code
- [CATransaction begin];
- [CATransaction setDisableActions:YES];
- [chart setValues:{@0: @30, @1:@100}];
- [CATransaction commit];
-@endcode
-    In example set 30 for first and 100 for second pieces.
- */
-- (void) setValues:(NSDictionary*)values;
-
 
 /*!
  @abstract Set new value by index for already exist piece. Animated.

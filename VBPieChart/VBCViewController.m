@@ -57,18 +57,16 @@
         [self.view addSubview:_chart];
     }
     [_chart setFrame:CGRectMake(10, 50, 300, 300)];
-    [_chart setHoleRadiusPrecent:0.3];
     
-    [_chart.layer setShadowOffset:CGSizeMake(2, 2)];
-    [_chart.layer setShadowRadius:3];
-    [_chart.layer setShadowColor:[UIColor blackColor].CGColor];
-    [_chart.layer setShadowOpacity:0.7];
+//    [_chart.layer setShadowOffset:CGSizeMake(2, 2)];
+//    [_chart.layer setShadowRadius:3];
+//    [_chart.layer setShadowColor:[UIColor blackColor].CGColor];
+//    [_chart.layer setShadowOpacity:0.7];
     _chart.startAngle = M_PI+M_PI_2;
     
-    [_chart setHoleRadiusPrecent:0.3];
+    [_chart setHoleRadiusPrecent:0.5];
     
-    [_chart setLabelsPosition:VBLabelsPositionOnChart];
-    
+//    [_chart setLabelsPosition:VBLabelsPositionOnChart];
     
 //    [_chart setChartValues:@[
 //                         @{@"name":@"first", @"value":@50, @"color":[UIColor redColor]},
@@ -79,14 +77,24 @@
 //                  duration:0.5
 //                   options:VBPieChartAnimationDefault];
     
+    
+
+    UIColor *colorWithImagePattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern.jpg"]];
+    UIColor *colorWithImagePattern2 = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern2.png"]];
+    
     self.chartValues = @[
-                         @{@"name":@"first", @"value":@50, @"color":[UIColor colorWithHex:0xdd191daa]},
-                         @{@"name":@"sec", @"value":@20, @"color":[UIColor colorWithHex:0xd81b60aa]},
-                         @{@"name":@"third", @"value":@40, @"color":[UIColor colorWithHex:0x8e24aaaa]},
-                         @{@"name":@"fourth", @"value":@70, @"color":[UIColor colorWithHex:0x3f51b5aa]},
-                         @{@"value":@65, @"color":[UIColor colorWithHex:0x5677fcaa]},
-                         @{@"value":@23, @"color":[UIColor colorWithHex:0x2baf2baa]},
-                         @{@"value":@34, @"color":[UIColor colorWithHex:0xb0bec5aa]},
+                         // Data can be passed after JSON Deserialization
+                         @{@"name":@"first", @"value":@50, @"color":@"#dd191daa", @"strokeColor":@"#fff"},
+                         
+                         // Chart can use patterns
+                         @{@"name":@"sec", @"value":@20, @"color":colorWithImagePattern, @"strokeColor":@"#fff"},
+                         @{@"name":@"third", @"value":@40, @"color":colorWithImagePattern2, @"strokeColor":[UIColor whiteColor]},
+                         
+                         // chart can be with or without titles
+                         @{@"name":@"fourth", @"value":@70, @"color":[UIColor colorWithHex:0x3f51b5aa], @"strokeColor":[UIColor whiteColor]},
+                         @{@"value":@65, @"color":[UIColor colorWithHex:0x5677fcaa], @"strokeColor":[UIColor whiteColor]},
+                         @{@"value":@23, @"color":[UIColor colorWithHex:0x2baf2baa], @"strokeColor":[UIColor whiteColor]},
+                         @{@"value":@34, @"color":[UIColor colorWithHex:0xb0bec5aa], @"strokeColor":[UIColor whiteColor]},
                          @{@"name":@"stroke", @"value":@54, @"color":[UIColor colorWithHex:0xf57c00aa], @"strokeColor":[UIColor whiteColor]}
                          ];
 
@@ -120,14 +128,35 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+
 - (IBAction) changeSec:(id)sender {
-    [_chart setValue:@(100) pieceAtIndex:1];
+    if (_chart.chartValues.count > 1) {
+        [_chart setValue:@(100) pieceAtIndex:1];
+    }
 }
 
 - (IBAction) removeSecond:(id)sender {
-    [_chart removePieceAtIndex:1];
+    if (_chart.chartValues.count > 1) {
+        [_chart removePieceAtIndex:1];
+    }
+}
+
+
+- (IBAction) jsonExample:(id)sender {
+    NSString *json_example = @"[ {\"name\":\"first\", \"value\":\"50\", \"color\":\"#84C69B\", \"strokeColor\":\"#fff\"}, \
+    {\"name\":\"second\", \"value\":\"60\", \"color\":\"#FECEA8\", \"strokeColor\":\"#fff\"}, \
+    {\"name\":\"second\", \"value\":\"75\", \"color\":\"#F7EEBB\", \"strokeColor\":\"#fff\"}, \
+    {\"name\":\"second\", \"value\":\"90\", \"color\":\"#D7C1E0\", \"strokeColor\":\"#fff\"} ]";
     
-//    [_chart insertChartValue:@{@"name":@"", @"value":@30} atIndex:1];
+    NSData *data = [json_example dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSArray *chartValues = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    
+    [_chart setChartValues:chartValues animation:YES duration:0.5 options:VBPieChartAnimationFan];
+}
+
+- (IBAction) insert:(id)sender {
+    [_chart insertChartValue:@{@"name":@"", @"value":@30, @"color":[NSString stringWithFormat:@"#%02X%02X%02X", arc4random() % 255, arc4random() % 255, arc4random() % 25 ]} atIndex:1];
 }
 
 - (IBAction) progressExample:(id)sender {
@@ -140,15 +169,20 @@
     [_chart.layer setShadowColor:[UIColor whiteColor].CGColor];
     [_chart.layer setShadowOpacity:0.0];
 
-    self.chartValues = @[
-                         @{@"name":@"", @"value":@100, @"color":[UIColor colorWithHex:0xffffffff]},
-                         @{@"name":@"", @"value":@0, @"color":[UIColor colorWithHex:0xdd191daa]},];
 
-     [_chart setChartValues:_chartValues animation:NO];
+    [_chart setChartValues:@[
+                             @{@"name":@"", @"value":@100, @"color":[UIColor colorWithHex:0xffffffff]},
+                             @{@"name":@"", @"value":@0, @"color":[UIColor colorWithHex:0xdd191daa]},]
+                 animation:NO];
     [self progressAction];
 }
 
 - (void) progressAction {
+    
+    if ([_chart chartValues].count != 2) {
+        return;
+    }
+    
     _progress += 0.25;
     
     [CATransaction setAnimationDuration:0.0167];
@@ -158,8 +192,8 @@
         }];
     }
 
-    [_chart setValues:@{@(0) : @(100-_progress),
-                        @(1) : @(_progress)}];
+    [_chart setValue:@(100-_progress) pieceAtIndex:0];
+    [_chart setValue:@(_progress) pieceAtIndex:1];
     
     if (_progress == 100) {
         _progress = 0;
@@ -168,41 +202,41 @@
 
 
 - (IBAction) growthAll:(id)sender {
-    
+    [_chart setHoleRadiusPrecent:0.5];
     [_chart setChartValues:_chartValues animation:YES options:VBPieChartAnimationGrowthAll | VBPieChartAnimationTimingEaseInOut];
 }
 
 - (IBAction) growth:(id)sender {
-    
+    [_chart setHoleRadiusPrecent:0.5];
     [_chart setChartValues:_chartValues animation:YES duration:1.0 options:VBPieChartAnimationGrowth];
 }
 
 - (IBAction) growthBackAll:(id)sender {
-    
+    [_chart setHoleRadiusPrecent:0.5];
     [_chart setChartValues:_chartValues animation:YES duration:0.4 options:VBPieChartAnimationGrowthBackAll | VBPieChartAnimationTimingEaseInOut];
 }
 
 - (IBAction) growthBack:(id)sender {
-    
+    [_chart setHoleRadiusPrecent:0.5];
     [_chart setChartValues:_chartValues animation:YES duration:1.0 options:VBPieChartAnimationGrowthBack];
 }
 
 
 - (IBAction) fan:(id)sender {
-    
+    [_chart setHoleRadiusPrecent:0.5];
     [_chart setChartValues:_chartValues animation:YES duration:0.4 options:VBPieChartAnimationFan];
 }
 
 
 - (IBAction) fanAll:(id)sender {
-
+    [_chart setHoleRadiusPrecent:0.5];
     [_chart setChartValues:_chartValues animation:YES options:VBPieChartAnimationFanAll];
 }
 
 - (IBAction) changeLenght:(id)sender {
     if (_chart.length < M_PI*2-0.01) {
         _chart.length = M_PI*2;
-        _chart.startAngle = 0;
+        _chart.startAngle = M_PI+M_PI_2;
     } else {
         _chart.length = M_PI;
         _chart.startAngle = M_PI;
