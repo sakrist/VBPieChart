@@ -112,25 +112,6 @@
 
 
 
-- (void) testSetValues {
-    [_chart setChartValues:chartValues animation:NO];
-    
-    
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    NSDictionary *dict = @{@"ss":@"", @{}:@{}};
-
-    XCTAssertThrowsSpecific([_chart setValues:dict], NSException); // wrong
-
-    [_chart setValues:@{@1:@50,
-                        @2:@100}]; // correct
-    
-    XCTAssertThrowsSpecific([_chart setValues:@{@200:@100}], NSException); // wrong, because we have only chartValues.count, no pieces with index 200
-    
-    
-    [CATransaction commit];
-}
-
 
 
 @end
