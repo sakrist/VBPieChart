@@ -137,4 +137,15 @@ Insert new piece at index. Animated.
 Remove piece at index.<br />
 `- (void) removePieceAtIndex:(NSInteger)index;`<br />
 
+Supported with ad:
 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Github -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1267260663063670"
+     data-ad-slot="2880275683"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
