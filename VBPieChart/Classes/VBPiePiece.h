@@ -11,7 +11,7 @@
 /*!
  Structure that represent one piece of Pie Chart.
  */
-@interface VBPiePiece : CAShapeLayer {
+@interface VBPiePiece : CAShapeLayer <CAAnimationDelegate> {
     @package
     double _innerRadius;
     double _outerRadius;
