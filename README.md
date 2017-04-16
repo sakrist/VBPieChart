@@ -1,13 +1,13 @@
 [![](https://travis-ci.org/sakrist/VBPieChart.svg?branch=master)](https://travis-ci.org/sakrist/VBPieChart)
 [![](https://img.shields.io/cocoapods/v/VBPieChart.svg?style=flat)](https://cocoapods.org/pods/VBPieChart)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)<br \>
-#VBPieChart
+# VBPieChart
 
 Animated Pie Chart control for iOS apps, based on CALayer. Very easy in use and have custom labeling.
 
 <img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%">
 
-##Usage
+## Usage
 
 
 #### Create simple pi chart with VBPieChart:
@@ -87,7 +87,7 @@ chart.holeRadiusPrecent = 0.5;
 
 `VBPieChart` is subclass of `UIView`.
 
-####Properties
+#### Properties
 
 `length`<br />
 Length of circle pie. Min values is 0 and max value 2*M_PI.
@@ -104,7 +104,7 @@ Defines the **radius**,  **full radius** = frame.size.width/2, actual **radius**
 `labelBlock`<br />
 Block will help to redefine positions for labels.
 
-####Methods
+#### Methods
 
 Get all changed chart values back.<br />
 `- (NSArray *) chartValues;`<br />
