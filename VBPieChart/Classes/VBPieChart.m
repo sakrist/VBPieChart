@@ -64,14 +64,28 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
 
 @end
 
+#if TARGET_INTERFACE_BUILDER
+@implementation VBPieChart (interface)
++ (NSArray*) _chartValues {
+    NSString *json_example = @"[ {\"name\":\"first\", \"value\":\"50\", \"color\":\"#84C69B\", \"strokeColor\":\"#fff\"}, \
+    {\"name\":\"second\", \"value\":\"60\", \"color\":\"#FECEA8\", \"strokeColor\":\"#fff\"}, \
+    {\"name\":\"second\", \"value\":\"75\", \"color\":\"#F7EEBB\", \"strokeColor\":\"#fff\"}, \
+    {\"name\":\"second\", \"value\":\"90\", \"color\":\"#D7C1E0\", \"strokeColor\":\"#fff\"} ]";
+    NSData *data = [json_example dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSArray *chartValues = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    return chartValues;
+}
+@end
+#endif
+
 
 @implementation VBPieChart {
     CGPoint _touchBegan;
 }
 
-- (id) init {
-    self = [super init];
-    [self configure];
+- (instancetype) init {
+    self = [self initWithFrame:CGRectZero];
     return self;
 }
 
@@ -105,7 +119,11 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
            forKeyPath:@"radiusPrecent"
               options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
               context:nil];
-    
+
+#if TARGET_INTERFACE_BUILDER
+    [self setChartValues:[VBPieChart _chartValues]
+                 animation:NO];
+#endif
 }
 
 - (void) dealloc {

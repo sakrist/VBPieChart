@@ -56,6 +56,8 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer, NSInteger index);
               animation:YES];
  @endcode
  */
+IB_DESIGNABLE
+
 @interface VBPieChart : UIView
 
 /*!
@@ -74,30 +76,30 @@ typedef CGPoint (^VBLabelBlock)(CALayer*layer, NSInteger index);
  @abstract Hole in center of diagram, precent of radius
  @note Default is 0.2, from 0 to 1
  */
-@property (nonatomic) double holeRadiusPrecent;
+@property (nonatomic) IBInspectable double holeRadiusPrecent;
 
 /*!
  @abstract Radius of diagram dependce to view size
  @note Default is 0.9, possible value from 0 to 1.
 */
-@property (nonatomic) double radiusPrecent;
+@property (nonatomic) IBInspectable double radiusPrecent;
 
 /*!
  @abstract Default is 0.25, i.e. 25% of radius.
  */
-@property (nonatomic) double maxAccentPrecent;
+@property (nonatomic) IBInspectable double maxAccentPrecent;
 
 /*!
  @abstract Length of circle, from 0 to M_PI*2.
  @note Default M_PI*2.
  */
-@property (nonatomic) double length;
+@property (nonatomic) IBInspectable double length;
 
 /*!
  @abstract Start angle, from 0 to M_PI*2
  @note Default 0.
  */
-@property (nonatomic) double startAngle;
+@property (nonatomic) IBInspectable double startAngle;
 
 
 /*!

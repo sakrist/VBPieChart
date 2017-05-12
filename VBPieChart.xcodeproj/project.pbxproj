@@ -217,9 +217,6 @@
 						CreatedOnToolsVersion = 7.2;
 						TestTargetID = D2C0FB6318B01CBA00C51D08;
 					};
-					D2C0FB6318B01CBA00C51D08 = {
-						DevelopmentTeam = DHKZ7WR43P;
-					};
 				};
 			};
 			buildConfigurationList = D2C0FB5F18B01CBA00C51D08 /* Build configuration list for PBXProject "VBPieChart" */;
@@ -441,9 +438,11 @@
 		D2C0FB9A18B01CBA00C51D08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VBPieChart/VBPieChart-Prefix.pch";
 				INFOPLIST_FILE = "VBPieChart/VBPieChart-Info.plist";
@@ -457,9 +456,11 @@
 		D2C0FB9B18B01CBA00C51D08 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VBPieChart/VBPieChart-Prefix.pch";
 				INFOPLIST_FILE = "VBPieChart/VBPieChart-Info.plist";
