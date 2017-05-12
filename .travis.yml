@@ -1,5 +1,3 @@
 language: objective-c
 osx_image: xcode8
-xcode_sdk: iphonesimulator10.0
-xcode_project: VBPieChart.xcodeproj
-xcode_scheme: VBPieChart
+script: xcodebuild clean test -project VBPieChart.xcodeproj  -scheme VBPieChart -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.0'
