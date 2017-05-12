@@ -300,7 +300,7 @@
     CAAnimationGroup *groupAnimation = (CAAnimationGroup *)[self animationForKey:@"groupAnimation"];
     if (groupAnimation) {
         _angle = _endAngle;
-        VBPiePiece *p = groupAnimation.delegate;
+        VBPiePiece *p = (VBPiePiece*)groupAnimation.delegate;
         [p __startAngle:_startAngle];
         [p __angle:_endAngle];
     }
@@ -308,19 +308,19 @@
     CAAnimation *arcAnimation = [self animationForKey:@"endAngle"];
     if (arcAnimation) {
         _angle = _endAngle;
-        VBPiePiece *p = arcAnimation.delegate;
+        VBPiePiece *p = (VBPiePiece*)arcAnimation.delegate;
         [p __angle:_endAngle];
     }
     
     arcAnimation = [self animationForKey:@"innerRadius"];
     if (arcAnimation) {
-        VBPiePiece *p = arcAnimation.delegate;
+        VBPiePiece *p = (VBPiePiece*)arcAnimation.delegate;
         [p __innerRadius:_innerRadius];
     }
     
     arcAnimation = [self animationForKey:@"outerRadius"];
     if (arcAnimation) {
-        VBPiePiece *p = arcAnimation.delegate;
+        VBPiePiece *p = (VBPiePiece*)arcAnimation.delegate;
         [p __outerRadius:_outerRadius];
     }
 }
