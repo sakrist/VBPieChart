@@ -205,6 +205,9 @@ static __inline__ CGFloat CGPointDistanceBetweenTwoPoints(CGPoint point1, CGPoin
     if (![chartValue isKindOfClass:[NSDictionary class]]) {
         [NSException raise:@"VBPieChartException" format:@"insert value should be only NSDictionary"];
     }
+
+    // Reset data table
+    self.chartsData = [NSMutableArray array];
     
     NSNumber *value = chartValue[@"value"];
     
