@@ -9,6 +9,8 @@
 #ifndef VBPiePiece_private_h
 #define VBPiePiece_private_h
 
+#import <UIKit/UIKit.h>
+
 // Private class
 @interface VBPiePieceData : NSObject
 @property (nonatomic) NSInteger index;

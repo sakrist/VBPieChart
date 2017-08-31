@@ -17,8 +17,7 @@ class ViewController: UIViewController {
         
         self.view.addSubview(chart);
         
-        chart.frame = CGRectMake(10, 50, 300, 300);
-        chart.enableStrokeColor = true;
+        chart.frame = CGRect(x: 10, y: 50, width: 300, height: 300);
         chart.holeRadiusPrecent = 0.3;
 
         
@@ -37,7 +36,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 
     }
     

@@ -180,6 +180,8 @@
 				TargetAttributes = {
 					D21E0E221A8A501100366D57 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = DHKZ7WR43P;
+						LastSwiftMigration = 0830;
 					};
 					D21E0E371A8A501100366D57 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -361,11 +363,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = DHKZ7WR43P;
 				INFOPLIST_FILE = VBPieChart_swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "VBPieChart_swift/VBPieChart_swift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -374,10 +378,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = DHKZ7WR43P;
 				INFOPLIST_FILE = VBPieChart_swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "VBPieChart_swift/VBPieChart_swift-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
