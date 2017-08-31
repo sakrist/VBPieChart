@@ -1,4 +1,7 @@
 
+#### [1.2.1] - 2017-31-08
+* migrate sample to latest swift 3.x
+
 #### [1.2.0] - 2016-20-01
 * fixed `removePieceAtIndex:`
 * fixed `insertChartValue:atIndex:`
