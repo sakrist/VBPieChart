@@ -2,11 +2,11 @@
 [![](https://img.shields.io/cocoapods/v/VBPieChart.svg?style=flat)](https://cocoapods.org/pods/VBPieChart)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
-# VBPieChart
+# [VBPieChart](https://github.com/sakrist/VBPieChart)
 
 Animated Pie Chart control for iOS apps, based on CALayer. Very easy in use and have custom labeling.
 
-<img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" width="50%">
+<img src="https://raw.githubusercontent.com/sakrist/VBPieChart/master/Screenshot.png" >
 
 ## Usage
 
@@ -140,7 +140,7 @@ Remove piece at index.<br />
 
 Supported with ad:
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Github -->
 <ins class="adsbygoogle"
      style="display:block"
